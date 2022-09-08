@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/computer-shop/static/css/main.4dd30574.css",
+    "main.js": "/computer-shop/static/js/main.c7f7bee0.js",
+    "static/media/home-bundle.png": "/computer-shop/static/media/home-bundle.56a82892d1accca4b773.png",
+    "index.html": "/computer-shop/index.html",
+    "main.4dd30574.css.map": "/computer-shop/static/css/main.4dd30574.css.map",
+    "main.c7f7bee0.js.map": "/computer-shop/static/js/main.c7f7bee0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.4dd30574.css",
+    "static/js/main.c7f7bee0.js"
+  ]
+}
