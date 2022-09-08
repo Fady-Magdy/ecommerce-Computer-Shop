@@ -1,0 +1,47 @@
+// eslint-disable-next-line import/no-anonymous-default-export
+export default [
+    {
+        id: "1",
+        title: "Redragon K512",
+        category: "keyboard",
+        price: 20,
+        image: "https://m.media-amazon.com/images/I/71w9I5LAUZL.jpg",
+        description: "Redragon K512 RGB Keyboard Mechanical Feeling switches",
+        count: 7,
+        addedToCart: false,
+        addedToCartCount: 0,
+    },
+    {
+        id: "2",
+        title: "Redragon H320",
+        category: "headphone",
+        price: 32,
+        image: "https://m.media-amazon.com/images/I/61Oq9Iv8UhL.jpg",
+        description: "Redragon H320 Headset",
+        count: 3,
+        addedToCart: false,
+        addedToCartCount: 0,
+    },
+    {
+        id: "3",
+        title: "Razer Basilisk X",
+        category: "mouse",
+        price: 38,
+        image: "https://m.media-amazon.com/images/I/81W3s4ZWMXL.jpg",
+        description: "Razer Basilisk X Hyperspeed Wireless Gaming Mouse: Bluetooth & Wireless Compatible",
+        count: 2,
+        addedToCart: false,
+        addedToCartCount: 0,
+    },
+    {
+        id: "4",
+        title: "Apple MacBook Pro 2020",
+        category: "laptop",
+        price: 1500,
+        image: "https://m.media-amazon.com/images/I/31MQgbpmcSL._AC_SY780_.jpg",
+        description: "Apple MacBook Pro 2020 Model (13-Inch, Apple M1 chip with 8-core CPU and 8-core GPU, 8GB, 512GB, Touch Bar and Touch ID, MYD92 ), Eng-KB, Space Gray",
+        count: 6,
+        addedToCart: false,
+        addedToCartCount: 0,
+    }
+]
