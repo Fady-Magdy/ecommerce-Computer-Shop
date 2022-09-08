@@ -1,18 +1,18 @@
 import Home from "./pages/home/Home.jsx";
-import './style/app.scss'
-import AppContextProvider from './context/AppContext'
+import "./style/app.scss";
+import AppContextProvider from "./context/AppContext";
 import ProductPage from "./pages/product/ProductsPage.jsx";
 import ProductDetail from "./components/productdetail/ProductDetail.jsx";
-import { BrowserRouter , Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {
   return (
     <div className="App">
       <AppContextProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={process.env.PUBLIC_URL}>
           <Routes>
-            <Route exact path="/" element={<Home/>}/>
-            <Route path="/product" element={<ProductPage/>}/>
-            <Route path="/product/:productId" element={<ProductDetail/>}/>
+            <Route exact path="/" element={<Home />} />
+            <Route path="/product" element={<ProductPage />} />
+            <Route path="/product/:productId" element={<ProductDetail />} />
           </Routes>
         </BrowserRouter>
       </AppContextProvider>
