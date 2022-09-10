@@ -1,10 +1,11 @@
-import React from "react";
-import "./home.scss";
-import BundleImage from "../../images/home-bundle.png";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import "./home.scss";
+import { appContext } from "../../context/AppContext";
+import BundleImage from "../../images/home-bundle.png";
 import Navbar from "../../components/navbar/Navbar";
-import data from "../../productsData";
 const Home = () => {
+  const { data } = useContext(appContext)
   return (
     <div className="home-page">
       <Navbar />

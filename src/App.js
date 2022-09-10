@@ -1,7 +1,7 @@
 import Home from "./pages/home/Home.jsx";
 import "./style/app.scss";
 import AppContextProvider from "./context/AppContext";
-import ProductPage from "./pages/product/ProductsPage.jsx";
+import ProductPage from "./pages/products/ProductsPage.jsx";
 import ProductDetail from "./components/productdetail/ProductDetail.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 function App() {

@@ -8,18 +8,70 @@ export default function Navbar() {
   const searchBar = useRef();
   const [emptySearchBar, setEmptySearchBar] = useState(true);
   const {
-    cartCount,
-    setCartCount,
     setSearchValue,
     cartData,
     setCartData,
     cartTotalPrice,
     setCartTotalPrice,
+    data,
+    setData,
+    ordersCount,
+    setOrdersCount,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const search = () => {
     setSearchValue(searchBar.current.value.toLowerCase());
   };
+  const count = useRef(0);
+  count.current = 0;
+  function removeItem(e) {
+    let newData = data;
+    newData[e.target.id - 1].addedToCart = false;
+    setData(newData);
+    let newCartData = cartData;
+    newCartData.splice(e.target.value - 1, 1);
+    setCartData(newCartData);
+    setOrdersCount((prev) => prev - 1);
+
+    let newTotalPrice = 0;
+    for (let i = 0; i < newCartData.length; i++) {
+      newTotalPrice += newCartData[i].price;
+    }
+    setCartTotalPrice(newTotalPrice);
+  }
+  function increaseQuantity(e) {
+    let avQuantity = e.target.getAttribute("data-avquantity");
+    let quantity = e.target.getAttribute("data-quantity");
+    if (quantity < avQuantity) {
+      let newCartData = cartData;
+      let originalPrice = newCartData[e.target.value - 1].originalPrice;
+      newCartData[e.target.value - 1].quantity += 1;
+      newCartData[e.target.value - 1].price += originalPrice;
+      setCartData(newCartData);
+
+      let newTotalPrice = 0;
+      for (let i = 0; i < newCartData.length; i++) {
+        newTotalPrice += newCartData[i].price;
+      }
+      setCartTotalPrice(newTotalPrice);
+    }
+  }
+  function decreaseQuantity(e) {
+    let quantity = e.target.getAttribute("data-quantity");
+    if (quantity > 1) {
+      let newCartData = cartData;
+      let originalPrice = newCartData[e.target.value - 1].originalPrice;
+      newCartData[e.target.value - 1].quantity -= 1;
+      newCartData[e.target.value - 1].price -= originalPrice;
+      setCartData(newCartData);
+
+      let newTotalPrice = 0;
+      for (let i = 0; i < newCartData.length; i++) {
+        newTotalPrice += newCartData[i].price;
+      }
+      setCartTotalPrice(newTotalPrice);
+    }
+  }
   return (
     <div className="navbar">
       <div className="left">
@@ -54,7 +106,7 @@ export default function Navbar() {
           }}
         >
           <i className="fa-solid fa-cart-shopping"></i>
-          <p>{cartCount}</p>
+          <p>{ordersCount}</p>
         </div>
         <div className="icon">
           <i className="fa-solid fa-right-from-bracket"></i>
@@ -64,8 +116,9 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className={`cart ${showCart && 'show'}`}>
+      <div className={`cart ${showCart && "show"}`}>
         {cartData.map((product) => {
+          count.current += 1;
           return (
             <div className="product-in-cart" key={product.id}>
               <div className="left">
@@ -73,8 +126,42 @@ export default function Navbar() {
               </div>
               <div className="right">
                 <h1 className="title">{product.title}</h1>
-                <p className="price">Price: ${product.price}</p>
-                <p className="quantity">Quantity: {product.quantity}</p>
+                <p className="price">
+                  Price: ${product.originalPrice}
+                  <button
+                  className="remove"
+                    onClick={removeItem}
+                    id={product.id}
+                    value={count.current}
+                  >
+                    Delete
+                  </button>
+                </p>
+                <p className="quantity">
+                  Quantity: {product.quantity}
+                  <span className="change-buttons">
+                    <button
+                      className="change-quantity"
+                      onClick={decreaseQuantity}
+                      id={product.id}
+                      data-quantity={product.quantity}
+                      data-avquantity={product.avQuantity}
+                      value={count.current}
+                    >
+                      -
+                    </button>
+                    <button
+                      className="change-quantity"
+                      onClick={increaseQuantity}
+                      id={product.id}
+                      data-quantity={product.quantity}
+                      data-avquantity={product.avQuantity}
+                      value={count.current}
+                    >
+                      +
+                    </button>
+                  </span>
+                </p>
               </div>
             </div>
           );
@@ -88,10 +175,15 @@ export default function Navbar() {
             <div className="buttons">
               <button className="checkout-btn">Checkout</button>
               <button
-                className="checkout-btn"
+                className="clear"
                 onClick={() => {
+                  let newData = data;
+                  newData.map((item) => {
+                    return (item.addedToCart = false);
+                  });
+                  setData(newData);
                   setCartData([]);
-                  setCartCount(0);
+                  setOrdersCount(0);
                   setCartTotalPrice(0);
                 }}
               >

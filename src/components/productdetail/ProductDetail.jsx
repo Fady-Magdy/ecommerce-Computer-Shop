@@ -1,30 +1,31 @@
 import { useContext } from "react";
 import { useParams } from "react-router-dom";
 import "./productdetail.scss";
-import Data from "../../productsData";
 import Navbar from "../navbar/Navbar";
 import { appContext } from "../../context/AppContext";
-import { useState } from "react";
 export default function ProductDetail() {
-  const { setCartCount, cartData, setCartData , setCartTotalPrice} = useContext(appContext);
+  const { setCartData, setCartTotalPrice , data , setData , setOrdersCount } = useContext(appContext);
   const { productId } = useParams();
-  const currentProduct = Data.find((prod) => prod.id === productId);
-  const [added, setAdded] = useState(false);
+  const currentProduct = data.find((prod) => prod.id === productId);
   const addToCart = () => {
-    if (!added) {
-      setCartCount((prev) => prev + 1);
+    if (!currentProduct.addedToCart) {
+      setOrdersCount(prev => prev + 1)
       setCartData((prev) => [
         ...prev,
         {
           id: currentProduct.id,
           title: currentProduct.title,
+          originalPrice: currentProduct.price,
           price: currentProduct.price,
           image: currentProduct.image,
-          quantity:  1,
+          quantity: 1,
+          avQuantity: currentProduct.count,
         },
       ]);
-      setCartTotalPrice(prev => prev + currentProduct.price)
-      setAdded(true);
+      setCartTotalPrice((prev) => prev + currentProduct.price);
+      let newData = data
+      newData[currentProduct.id - 1].addedToCart = true
+      setData(newData)
     }
   };
   return (
