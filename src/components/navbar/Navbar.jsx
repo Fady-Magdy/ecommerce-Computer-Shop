@@ -17,8 +17,10 @@ export default function Navbar() {
     setData,
     ordersCount,
     setOrdersCount,
+    notificationCount
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
   const search = () => {
     setSearchValue(searchBar.current.value.toLowerCase());
   };
@@ -100,23 +102,43 @@ export default function Navbar() {
       </div>
       <div className="right">
         <div
-          className="icon"
+          className={`icon ${showNotification ? "on" : ""}`}
+          onClick={() => {
+            setShowNotification(!showNotification);
+            setShowCart(false);
+          }}
+        >
+          <i className="fa-solid fa-bell"></i>
+          {notificationCount > 0 && <p>{ notificationCount }</p>}
+        </div>
+        <div
+          className={`icon ${showCart ? "on" : ""}`}
           onClick={() => {
             setShowCart(!showCart);
+            setShowNotification(false);
           }}
         >
           <i className="fa-solid fa-cart-shopping"></i>
           <p>{ordersCount}</p>
         </div>
+        
         <div className="icon">
           <i className="fa-solid fa-right-from-bracket"></i>
+        </div>
+        <div className="icon">
+          <i className="fa-solid fa-bars"></i>
         </div>
         <div className="user-image">
           <img src={userImage} alt="" />
         </div>
-      </div>
 
-      <div className={`cart ${showCart && "show"}`}>
+      </div>
+      <div
+        className={`notification ${showNotification && "show-notification"}`}
+      >
+        No New Notifications
+      </div>
+      <div className={`cart ${showCart && "showc-cart"}`}>
         {cartData.map((product) => {
           count.current += 1;
           return (
@@ -129,7 +151,7 @@ export default function Navbar() {
                 <p className="price">
                   Price: ${product.originalPrice}
                   <button
-                  className="remove"
+                    className="remove"
                     onClick={removeItem}
                     id={product.id}
                     value={count.current}

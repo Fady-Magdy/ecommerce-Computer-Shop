@@ -9,8 +9,11 @@ const Product = () => {
   const newData = data.filter(
     (product) =>
       product.title.toLowerCase().includes(searchValue) ||
-      product.description.toLowerCase().includes(searchValue)
+      product.description.toLowerCase().includes(searchValue) ||
+      product.category.toLowerCase().includes(searchValue)
   );
+
+  newData.sort((a,b) => (a.rating < b.rating ? 1 : -1));
   return (
     <div className="products-page">
       <Navbar />
@@ -21,15 +24,28 @@ const Product = () => {
         )}
         <div className="result-container">
           {newData.map((product) => {
+            let stars = [];
+            let ratingCount = 0;
+            for (let i = 0; i < 5; i++) {
+              if (ratingCount >= product.rating) {
+                stars.push(<i key={i} className="fa-regular fa-star"></i>);
+              } else {
+                stars.push(<i key={i} className="fa-solid fa-star"></i>);
+              }
+              ratingCount++;
+            }
             return (
               <div className="product" key={product.id}>
                 <div className="top">
-                  <img src={product.image} alt="" />
+                  <img src={product.images[0]} alt="" />
                 </div>
                 <div className="bottom">
                   <div className="title-view">
                     <h1 className="title">{product.title}</h1>
                     <Link to={`/product/${product.id}`}>View</Link>
+                  </div>
+                  <div className="rating">
+                    <div className="stars">{stars}</div>
                   </div>
                   <p className="description">{product.description}</p>
                   <div className="price-count">

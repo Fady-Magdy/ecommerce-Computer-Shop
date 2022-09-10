@@ -63,6 +63,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
     .icon {
       position: relative;
       width: 40px;
@@ -74,6 +75,11 @@
       border: 2px solid transparent;
       transition: 0.3s;
       cursor: pointer;
+      &.on {
+        i {
+          color: rgb(104, 200, 255);
+        }
+      }
       &:hover {
         border: 2px solid rgba(255, 255, 255, 0.685);
       }
@@ -93,7 +99,7 @@
         background-color: red;
       }
       i {
-        font-size: 120%;
+        font-size: 140%;
         color: #fff;
         margin: 10px;
       }
@@ -117,6 +123,26 @@
       }
     }
   }
+  .notification {
+    position: absolute;
+    top: 50px;
+    right: -300px;
+    width: 300px;
+    height: 100px;
+    z-index: -1;
+    background-color: #fff;
+    transition: 1s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    font-weight: 600;
+    border-bottom-left-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.256);
+    &.show-notification {
+      right: 0;
+    }
+  }
   .cart {
     position: absolute;
     display: flex;
@@ -128,11 +154,11 @@
     padding: 10px;
     gap: 10px;
     background-color: rgb(35, 49, 61);
-    border-bottom-left-radius: 5px;
+    border-bottom-left-radius: 10px;
     translate: 300px;
-    transition: 1.2s;
+    transition: 1s;
     overflow: hidden;
-    &.show {
+    &.showc-cart {
       translate: 0;
     }
     .cart-is-empty {
@@ -151,7 +177,7 @@
       transform: scaleY(1);
       transform-origin: top;
       transition: 0.4s;
-      animation: card-item-show 0.7s ;
+      animation: card-item-show 0.7s;
       @keyframes card-item-show {
         0% {
           top: -100px;
