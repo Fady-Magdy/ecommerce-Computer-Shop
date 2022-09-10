@@ -13,7 +13,7 @@ const Product = () => {
       product.category.toLowerCase().includes(searchValue)
   );
 
-  newData.sort((a,b) => (a.rating < b.rating ? 1 : -1));
+  newData.sort((a, b) => (a.rating < b.rating ? 1 : -1));
   return (
     <div className="products-page">
       <Navbar />
@@ -45,7 +45,9 @@ const Product = () => {
                     <Link to={`/product/${product.id}`}>View</Link>
                   </div>
                   <div className="rating">
-                    <div className="stars">{stars}</div>
+                    <div className="stars">
+                      {stars} {"(" + product.raters + ")"}
+                    </div>
                   </div>
                   <p className="description">{product.description}</p>
                   <div className="price-count">
