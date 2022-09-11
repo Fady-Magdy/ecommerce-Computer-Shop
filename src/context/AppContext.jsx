@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import { Link } from "react-router-dom";
-import Data from "../productsData";
+import ProductData from "../productsData";
+import UserData from "../userData";
 export const appContext = createContext();
 
 export default function AppContextProvider(props) {
@@ -11,13 +12,46 @@ export default function AppContextProvider(props) {
   const [ordersCount, setOrdersCount] = useState(0);
   const [notificationCount, setNotificationCount] = useState(0);
   const [favouriteList, setFavouriteList] = useState([]);
-  const [data, setData] = useState(Data);
+  const [productData, setProductData] = useState(ProductData);
+  const [userData, setUserData] = useState(UserData);
   useEffect(() => {
-    let newData = data;
-    newData.sort(() => Math.random() - 0.5);
-    setData(newData);
-    setFavouriteList(data.filter((product) => product.favourite));
+    setFavouriteList(productData.filter((product) => product.favourite));
   }, []);
+  //  Functions
+  const getStars = (prod) => {
+    let stars = [];
+    let ratingCount = 0;
+    for (let i = 0; i < 5; i++) {
+      if (ratingCount >= prod.rating) {
+        stars.push(<i key={i} className="fa-regular fa-star"></i>);
+      } else {
+        stars.push(<i key={i} className="fa-solid fa-star"></i>);
+      }
+      ratingCount++;
+    }
+    return stars;
+  };
+  const addToCart = (prod) => {
+    if (!prod.addedToCart) {
+      setOrdersCount((prev) => prev + 1);
+      setCartData((prev) => [
+        ...prev,
+        {
+          id: prod.id,
+          title: prod.title,
+          originalPrice: prod.price,
+          price: prod.price,
+          image: prod.images[0],
+          quantity: 1,
+          avQuantity: prod.count,
+        },
+      ]);
+      setCartTotalPrice((prev) => prev + prod.price);
+      let newData = productData;
+      newData[prod.id - 1].addedToCart = true;
+      setProductData(newData);
+    }
+  };
   const goRight = (list, ref, sectionNum) => {
     if (sectionNum.current < list.length - 5) {
       ref.current.style.transform += "translateX(-320px)";
@@ -77,8 +111,8 @@ export default function AppContextProvider(props) {
     setCartData,
     cartTotalPrice,
     setCartTotalPrice,
-    data,
-    setData,
+    productData,
+    setProductData,
     ordersCount,
     setOrdersCount,
     notificationCount,
@@ -88,6 +122,10 @@ export default function AppContextProvider(props) {
     showItems,
     goRight,
     goLeft,
+    addToCart,
+    getStars,
+    userData,
+    setUserData,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

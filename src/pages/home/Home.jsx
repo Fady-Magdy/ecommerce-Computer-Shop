@@ -6,30 +6,34 @@ import BundleImage from "../../images/home-bundle.png";
 import Navbar from "../../components/navbar/Navbar";
 
 const Home = () => {
-  const { data, showItems, goRight, goLeft } = useContext(appContext);
+  const { productData, showItems, goRight, goLeft } = useContext(appContext);
   const firstSectionRef = useRef(null);
   const autoMove = useRef(true);
   let currentProductSection1 = useRef(0);
+
   useEffect(() => {
-    setInterval(() => {
-      if (autoMove.current) {
-        if (currentProductSection1.current < data.length - 5) {
-          firstSectionRef.current.style.transform += "translateX(-320px)";
-          currentProductSection1.current += 1;
-        } else {
-          firstSectionRef.current.style.transform = "translateX(0)";
-          currentProductSection1.current = 0;
+    if (window.matchMedia("(max-width: 480px)").matches) {
+    } else {
+      setInterval(() => {
+        if (autoMove.current) {
+          if (currentProductSection1.current < productData.length - 5) {
+            firstSectionRef.current.style.transform += "translateX(-320px)";
+            currentProductSection1.current += 1;
+          } else {
+            firstSectionRef.current.style.transform = "translateX(0)";
+            currentProductSection1.current = 0;
+          }
         }
-      }
-    }, 3000);
+      }, 3000);
+    }
   }, []);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  let keyboards = data.filter((prod) => prod.category === "keyboard");
-  let mouses = data.filter((prod) => prod.category === "mouse");
-  let laptops = data.filter((prod) => prod.category === "laptop");
-  let headphones = data.filter((prod) => prod.category === "headphone");
+  let keyboards = productData.filter((prod) => prod.category === "keyboard");
+  let mouses = productData.filter((prod) => prod.category === "mouse");
+  let laptops = productData.filter((prod) => prod.category === "laptop");
+  let headphones = productData.filter((prod) => prod.category === "headphone");
 
   //  functions
 
@@ -55,12 +59,12 @@ const Home = () => {
           }}
         >
           <div ref={firstSectionRef} className="products-line">
-            {showItems(data)}
+            {showItems(productData)}
           </div>
           <div
             className="arrow right-arrow"
             onClick={() => {
-              goRight(data, firstSectionRef, currentProductSection1);
+              goRight(productData, firstSectionRef, currentProductSection1);
             }}
           >
             <i className="fa-solid fa-arrow-right"></i>
@@ -68,7 +72,7 @@ const Home = () => {
           <div
             className="arrow left-arrow"
             onClick={() => {
-              goLeft(data, firstSectionRef, currentProductSection1);
+              goLeft(productData, firstSectionRef, currentProductSection1);
             }}
           >
             <i className="fa-solid fa-arrow-left"></i>

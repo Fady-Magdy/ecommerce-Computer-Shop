@@ -1,10 +1,10 @@
-import React, { useRef, useState, useContext } from "react";
+import React, { useRef, useState, useContext , useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
-import userImage from "../../images/user-image.jpg";
 import { appContext } from "../../context/AppContext";
 
 export default function Navbar() {
+  const [mobileView, setMobileView] = useState(false);
   const searchBar = useRef();
   const [emptySearchBar, setEmptySearchBar] = useState(true);
   const {
@@ -13,25 +13,36 @@ export default function Navbar() {
     setCartData,
     cartTotalPrice,
     setCartTotalPrice,
-    data,
-    setData,
+    productData,
+    setProductData,
     ordersCount,
     setOrdersCount,
     notificationCount,
+    userData,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
-  const search = () => {
-    setSearchValue(searchBar.current.value.toLowerCase());
+  const search = (valueFrom) => {
+    setSearchValue(valueFrom);
   };
   const count = useRef(0);
   count.current = 0;
+
+useEffect(() => {
+  if (window.matchMedia("(max-width: 480px)").matches) {
+    setMobileView(true);
+  } else {
+  }
+}, [])
+
+  
+  //  Functions
   function removeItem(e) {
-    let newData = data;
+    let newData = productData;
     newData[e.target.id - 1].addedToCart = false;
-    setData(newData);
+    setProductData(newData);
     let newCartData = cartData;
     newCartData.splice(e.target.value - 1, 1);
     setCartData(newCartData);
@@ -91,7 +102,7 @@ export default function Navbar() {
         </div>
         <Link to="/">
           <h1>
-            <i class="fa-solid fa-computer"></i> COMPUTER SHOP
+            <i className="fa-solid fa-computer"></i>{!mobileView && "Computer Shop"}
           </h1>
         </Link>
       </div>
@@ -110,7 +121,7 @@ export default function Navbar() {
           to="/product"
           className={`${emptySearchBar ? "disabled-link" : ""}`}
         >
-          <button onClick={search}>
+          <button onClick={()=>{search(searchBar.current.value.toLowerCase())}}>
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </Link>
@@ -141,9 +152,9 @@ export default function Navbar() {
           <p>{ordersCount}</p>
         </div>
 
-        <div className="icon">
+        {!mobileView  && <div className="icon">
           <i className="fa-solid fa-right-from-bracket"></i>
-        </div>
+        </div>}
         <div
           className="user-image"
           onClick={() => {
@@ -152,14 +163,14 @@ export default function Navbar() {
             setShowCart(false);
           }}
         >
-          <img src={userImage} alt="" />
+          <img src={userData.userImage} alt="" />
         </div>
       </div>
       <div className={`user-menu ${showUserMenu ? "show-user-menu" : ""}`}>
         <div className="user-image">
-          <img src={userImage} alt="" />
+          <img src={userData.userImage} alt="" />
         </div>
-        <h3>Martin Johnson</h3>
+        <h3>{userData.username}</h3>
         <Link className="view-profile-btn" to="/profile">
           View Profile
         </Link>
@@ -230,11 +241,11 @@ export default function Navbar() {
               <button
                 className="clear"
                 onClick={() => {
-                  let newData = data;
+                  let newData = productData;
                   newData.map((item) => {
                     return (item.addedToCart = false);
                   });
-                  setData(newData);
+                  setProductData(newData);
                   setCartData([]);
                   setOrdersCount(0);
                   setCartTotalPrice(0);
@@ -249,6 +260,8 @@ export default function Navbar() {
       <div className={`menu ${showMenu ? "show-menu" : ""}`}>
         <h3>Menu</h3>
         <ul>
+          <div className="menu-list pages">
+          <h4>Pages</h4>
           <li>
             <Link className="menu-item" to="/">
               <div className="icon">
@@ -281,6 +294,42 @@ export default function Navbar() {
               <p>Orders</p>
             </Link>
           </li>
+          </div>
+          <div className="menu-list categories">
+          <h4>Categories</h4>
+          <li>
+            <Link onClick={()=>{search("laptop")}} className="menu-item" to="/product">
+              <div className="icon">
+              <i className="fa-solid fa-laptop"></i>
+              </div>{" "}
+              <p>Laptops</p>
+            </Link>
+          </li>
+          <li>
+            <Link onClick={()=>{search("keyboard")}} className="menu-item" to="/product">
+              <div className="icon">
+              <i className="fa-solid fa-keyboard"></i>
+              </div>{" "}
+              <p>Keyboards</p>
+            </Link>
+          </li>
+          <li>
+            <Link onClick={()=>{search("mouse")}} className="menu-item" to="/product">
+              <div className="icon">
+              <i className="fa-solid fa-computer-mouse"></i>
+              </div>
+              <p>Mouses</p>
+            </Link>
+          </li>
+          <li>
+            <Link onClick={()=>{search("headphone")}} className="menu-item" to="/product">
+              <div className="icon">
+              <i className="fa-solid fa-headphones-simple"></i>
+              </div>{" "}
+              <p>Headphones</p>
+            </Link>
+          </li>
+          </div>
         </ul>
       </div>
     </div>

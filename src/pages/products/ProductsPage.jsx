@@ -3,10 +3,10 @@ import "./productspage.scss";
 import Navbar from "../../components/navbar/Navbar";
 import { appContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
-import data from "../../productsData";
+
 const Product = () => {
-  const { searchValue } = useContext(appContext);
-  const newData = data.filter(
+  const { searchValue , productData } = useContext(appContext);
+  const newData = productData.filter(
     (product) =>
       product.title.toLowerCase().includes(searchValue) ||
       product.description.toLowerCase().includes(searchValue) ||
