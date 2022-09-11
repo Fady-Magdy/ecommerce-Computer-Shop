@@ -1,8 +1,8 @@
-import React, { useRef, useState, useContext , useEffect } from "react";
+import React, { useRef, useState, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./navbar.scss";
 import { appContext } from "../../context/AppContext";
-
+import CheckOut from "../checkout/CheckOut";
 export default function Navbar() {
   const [mobileView, setMobileView] = useState(false);
   const searchBar = useRef();
@@ -19,6 +19,11 @@ export default function Navbar() {
     setOrdersCount,
     notificationCount,
     userData,
+    checkOut,
+    setCheckOut,
+    removeItem,
+    increaseQuantity,
+    decreaseQuantity,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -30,63 +35,14 @@ export default function Navbar() {
   const count = useRef(0);
   count.current = 0;
 
-useEffect(() => {
-  if (window.matchMedia("(max-width: 480px)").matches) {
-    setMobileView(true);
-  } else {
-  }
-}, [])
+  useEffect(() => {
+    if (window.matchMedia("(max-width: 480px)").matches) {
+      setMobileView(true);
+    } else {
+    }
+  }, []);
 
-  
   //  Functions
-  function removeItem(e) {
-    let newData = productData;
-    newData[e.target.id - 1].addedToCart = false;
-    setProductData(newData);
-    let newCartData = cartData;
-    newCartData.splice(e.target.value - 1, 1);
-    setCartData(newCartData);
-    setOrdersCount((prev) => prev - 1);
-
-    let newTotalPrice = 0;
-    for (let i = 0; i < newCartData.length; i++) {
-      newTotalPrice += newCartData[i].price;
-    }
-    setCartTotalPrice(newTotalPrice);
-  }
-  function increaseQuantity(e) {
-    let avQuantity = e.target.getAttribute("data-avquantity");
-    let quantity = e.target.getAttribute("data-quantity");
-    if (quantity < avQuantity) {
-      let newCartData = cartData;
-      let originalPrice = newCartData[e.target.value - 1].originalPrice;
-      newCartData[e.target.value - 1].quantity += 1;
-      newCartData[e.target.value - 1].price += originalPrice;
-      setCartData(newCartData);
-
-      let newTotalPrice = 0;
-      for (let i = 0; i < newCartData.length; i++) {
-        newTotalPrice += newCartData[i].price;
-      }
-      setCartTotalPrice(newTotalPrice);
-    }
-  }
-  function decreaseQuantity(e) {
-    let quantity = e.target.getAttribute("data-quantity");
-    if (quantity > 1) {
-      let newCartData = cartData;
-      let originalPrice = newCartData[e.target.value - 1].originalPrice;
-      newCartData[e.target.value - 1].quantity -= 1;
-      newCartData[e.target.value - 1].price -= originalPrice;
-      setCartData(newCartData);
-
-      let newTotalPrice = 0;
-      for (let i = 0; i < newCartData.length; i++) {
-        newTotalPrice += newCartData[i].price;
-      }
-      setCartTotalPrice(newTotalPrice);
-    }
-  }
   return (
     <div className="navbar">
       <div className="left">
@@ -102,7 +58,8 @@ useEffect(() => {
         </div>
         <Link to="/">
           <h1>
-            <i className="fa-solid fa-computer"></i>{!mobileView && "Computer Shop"}
+            <i className="fa-solid fa-computer"></i>
+            {!mobileView && "Computer Shop"}
           </h1>
         </Link>
       </div>
@@ -121,7 +78,11 @@ useEffect(() => {
           to="/product"
           className={`${emptySearchBar ? "disabled-link" : ""}`}
         >
-          <button onClick={()=>{search(searchBar.current.value.toLowerCase())}}>
+          <button
+            onClick={() => {
+              search(searchBar.current.value.toLowerCase());
+            }}
+          >
             <i className="fa-solid fa-magnifying-glass"></i>
           </button>
         </Link>
@@ -152,9 +113,11 @@ useEffect(() => {
           <p>{ordersCount}</p>
         </div>
 
-        {!mobileView  && <div className="icon">
-          <i className="fa-solid fa-right-from-bracket"></i>
-        </div>}
+        {!mobileView && (
+          <div className="icon">
+            <i className="fa-solid fa-right-from-bracket"></i>
+          </div>
+        )}
         <div
           className="user-image"
           onClick={() => {
@@ -181,55 +144,57 @@ useEffect(() => {
         No New Notifications
       </div>
       <div className={`cart ${showCart && "showc-cart"}`}>
-        {cartData.map((product) => {
-          count.current += 1;
-          return (
-            <div className="product-in-cart" key={product.id}>
-              <div className="left">
-                <img src={product.image} alt="" />
-              </div>
-              <div className="right">
-                <h1 className="title">{product.title}</h1>
-                <p className="price">
-                  Price: ${product.originalPrice}
-                  <button
-                    className="remove"
-                    onClick={removeItem}
-                    id={product.id}
-                    value={count.current}
-                  >
-                    Delete
-                  </button>
-                </p>
-                <p className="quantity">
-                  Quantity: {product.quantity}
-                  <span className="change-buttons">
+        <div className="products">
+          {cartData.map((product) => {
+            count.current += 1;
+            return (
+              <div className="product-in-cart" key={product.id}>
+                <div className="left">
+                  <img src={product.image} alt="" />
+                </div>
+                <div className="right">
+                  <h1 className="title">{product.title}</h1>
+                  <p className="price">
+                    Price: ${product.originalPrice}
                     <button
-                      className="change-quantity"
-                      onClick={decreaseQuantity}
+                      className="remove"
+                      onClick={removeItem}
                       id={product.id}
-                      data-quantity={product.quantity}
-                      data-avquantity={product.avQuantity}
                       value={count.current}
                     >
-                      -
+                      Delete
                     </button>
-                    <button
-                      className="change-quantity"
-                      onClick={increaseQuantity}
-                      id={product.id}
-                      data-quantity={product.quantity}
-                      data-avquantity={product.avQuantity}
-                      value={count.current}
-                    >
-                      +
-                    </button>
-                  </span>
-                </p>
+                  </p>
+                  <p className="quantity">
+                    Quantity: {product.quantity}
+                    <span className="change-buttons">
+                      <button
+                        className="change-quantity"
+                        onClick={decreaseQuantity}
+                        id={product.id}
+                        data-quantity={product.quantity}
+                        data-avquantity={product.avQuantity}
+                        value={count.current}
+                      >
+                        -
+                      </button>
+                      <button
+                        className="change-quantity"
+                        onClick={increaseQuantity}
+                        id={product.id}
+                        data-quantity={product.quantity}
+                        data-avquantity={product.avQuantity}
+                        value={count.current}
+                      >
+                        +
+                      </button>
+                    </span>
+                  </p>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
         {cartData.length === 0 && (
           <h1 className="cart-is-empty">Cart is Empty</h1>
         )}
@@ -237,7 +202,15 @@ useEffect(() => {
           <>
             <h3 className="total">Total: ${cartTotalPrice}</h3>
             <div className="buttons">
-              <button className="checkout-btn">Checkout</button>
+              <button
+                onClick={() => {
+                  setCheckOut(true);
+                  setShowCart(false);
+                }}
+                className="checkout-btn"
+              >
+                Checkout
+              </button>
               <button
                 className="clear"
                 onClick={() => {
@@ -261,77 +234,102 @@ useEffect(() => {
         <h3>Menu</h3>
         <ul>
           <div className="menu-list pages">
-          <h4>Pages</h4>
-          <li>
-            <Link className="menu-item" to="/">
-              <div className="icon">
-                <i className="fa-solid fa-house"></i>
-              </div>{" "}
-              <p>Home</p>
-            </Link>
-          </li>
-          <li>
-            <Link className="menu-item" to="/product">
-              <div className="icon">
-                <i className="fa-sharp fa-solid fa-shop"></i>
-              </div>{" "}
-              <p>Products</p>
-            </Link>
-          </li>
-          <li>
-            <Link className="menu-item" to="/profile">
-              <div className="icon">
-                <i className="fa-solid fa-user"></i>{" "}
-              </div>
-              <p>Profile</p>
-            </Link>
-          </li>
-          <li>
-            <Link className="menu-item" to="">
-              <div className="icon">
-                <i className="fa-solid fa-bag-shopping"></i>
-              </div>{" "}
-              <p>Orders</p>
-            </Link>
-          </li>
+            <h4>Pages</h4>
+            <li>
+              <Link className="menu-item" to="/">
+                <div className="icon">
+                  <i className="fa-solid fa-house"></i>
+                </div>{" "}
+                <p>Home</p>
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-item" to="/product">
+                <div className="icon">
+                  <i className="fa-sharp fa-solid fa-shop"></i>
+                </div>{" "}
+                <p>Products</p>
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-item" to="/profile">
+                <div className="icon">
+                  <i className="fa-solid fa-user"></i>{" "}
+                </div>
+                <p>Profile</p>
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-item" to="">
+                <div className="icon">
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </div>{" "}
+                <p>Orders</p>
+              </Link>
+            </li>
           </div>
           <div className="menu-list categories">
-          <h4>Categories</h4>
-          <li>
-            <Link onClick={()=>{search("laptop")}} className="menu-item" to="/product">
-              <div className="icon">
-              <i className="fa-solid fa-laptop"></i>
-              </div>{" "}
-              <p>Laptops</p>
-            </Link>
-          </li>
-          <li>
-            <Link onClick={()=>{search("keyboard")}} className="menu-item" to="/product">
-              <div className="icon">
-              <i className="fa-solid fa-keyboard"></i>
-              </div>{" "}
-              <p>Keyboards</p>
-            </Link>
-          </li>
-          <li>
-            <Link onClick={()=>{search("mouse")}} className="menu-item" to="/product">
-              <div className="icon">
-              <i className="fa-solid fa-computer-mouse"></i>
-              </div>
-              <p>Mouses</p>
-            </Link>
-          </li>
-          <li>
-            <Link onClick={()=>{search("headphone")}} className="menu-item" to="/product">
-              <div className="icon">
-              <i className="fa-solid fa-headphones-simple"></i>
-              </div>{" "}
-              <p>Headphones</p>
-            </Link>
-          </li>
+            <h4>Categories</h4>
+            <li>
+              <Link
+                onClick={() => {
+                  search("laptop");
+                }}
+                className="menu-item"
+                to="/product"
+              >
+                <div className="icon">
+                  <i className="fa-solid fa-laptop"></i>
+                </div>{" "}
+                <p>Laptops</p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  search("keyboard");
+                }}
+                className="menu-item"
+                to="/product"
+              >
+                <div className="icon">
+                  <i className="fa-solid fa-keyboard"></i>
+                </div>{" "}
+                <p>Keyboards</p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  search("mouse");
+                }}
+                className="menu-item"
+                to="/product"
+              >
+                <div className="icon">
+                  <i className="fa-solid fa-computer-mouse"></i>
+                </div>
+                <p>Mouses</p>
+              </Link>
+            </li>
+            <li>
+              <Link
+                onClick={() => {
+                  search("headphone");
+                }}
+                className="menu-item"
+                to="/product"
+              >
+                <div className="icon">
+                  <i className="fa-solid fa-headphones-simple"></i>
+                </div>{" "}
+                <p>Headphones</p>
+              </Link>
+            </li>
           </div>
         </ul>
       </div>
+      {checkOut && <CheckOut />}
     </div>
   );
 }

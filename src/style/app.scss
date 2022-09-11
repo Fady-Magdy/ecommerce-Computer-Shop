@@ -18,7 +18,7 @@ body {
 .section {
   width: 100vw;
   position: relative;
-  background-color: rgb(231, 242, 255);
+  background-color: rgb(208, 229, 255);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
   padding: 20px;
   margin-bottom: 40px;
@@ -198,13 +198,13 @@ body {
     .icon {
       width: 30px;
       height: 30px;
-        i {
-          font-size: 20px;
-        }
-        p {
-          top: -20px;
-          right: -10px;
-        }
+      i {
+        font-size: 20px;
+      }
+      p {
+        top: -20px;
+        right: -10px;
+      }
     }
   }
   .section {
@@ -212,7 +212,7 @@ body {
     .products-line {
       display: flex;
       flex-direction: column;
-      height: 920px;
+      height: 1400px;
       .product {
         width: 80vw;
         margin: 10px 0;
@@ -226,6 +226,26 @@ body {
       padding-left: 0;
       margin-top: 20px;
       text-align: center;
+    }
+    .show-more {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      z-index: 1;
+      height: 100px;
+      background: linear-gradient(
+        to top,
+        #fff,
+        #fff,
+        rgba(255, 255, 255, 0.151)
+      );
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      color: rgba(0, 0, 0, 0.733);
+      cursor: pointer;
     }
   }
   .home-container {
@@ -251,5 +271,43 @@ body {
       }
     }
   }
+  .product-page {
+    .product-details {
+      margin-top: 80px !important;
+      flex-direction: column;
+      width: 90% !important;
+      .left {
+        width: 100% !important;
+      }
+      .right {
+        width: 100% !important;
+        margin-left: 0 !important;
+        .title {
+          width: 100% !important;
+        }
+        .description {
+          width: 100% !important;
+        }
+      }
+      .buttons {
+        position: static !important;
+      }
+    }
+  }
+}
 
+.check-out {
+  position: absolute;
+
+  left: 50%;
+  translate: -50% -50%;
+  width: 600px;
+  height: 700px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.219);
+  animation: check-out-move 1s;
+}
+.show-more {
+  display: none;
 }

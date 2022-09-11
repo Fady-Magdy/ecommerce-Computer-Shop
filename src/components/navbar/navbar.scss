@@ -167,7 +167,6 @@
             color: #fff;
             display: flex;
             align-items: center;
-
             transition: 0.4s;
             &::before {
               content: "";
@@ -286,103 +285,109 @@
     right: 0;
     top: 50px;
     width: 300px;
+    max-height: 70vh;
     padding: 10px;
-    gap: 10px;
     background-color: rgb(35, 49, 61);
     border-bottom-left-radius: 10px;
     translate: 300px;
     transition: 1s;
-    overflow: hidden;
+
     &.showc-cart {
       translate: 0;
     }
     .cart-is-empty {
       color: #fff;
     }
-    .product-in-cart {
-      position: relative;
-      width: 100%;
-      display: flex;
-      background-color: rgba(255, 255, 255, 0.267);
-      color: #fff;
-      overflow: hidden;
-      border-radius: 5px;
-      padding: 10px 0;
-      height: auto;
-      transform: scaleY(1);
-      transform-origin: top;
-      transition: 0.4s;
-      animation: card-item-show 0.7s;
-      @keyframes card-item-show {
-        0% {
-          top: -100px;
-          transform: scale(0);
-        }
-        100% {
-          top: 0;
-          transform: scale(1);
-        }
+    .products {
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
       }
-      .left {
-        width: 30%;
-        background-color: #fff;
-        margin-left: 10px;
+      .product-in-cart {
+        position: relative;
+        width: 100%;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 5px;
+        background-color: rgba(255, 255, 255, 0.267);
+        color: #fff;
         overflow: hidden;
-        img {
-          width: 80%;
-        }
-      }
-      .right {
-        margin-left: 10px;
-        width: 70%;
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        .title {
-          margin: 5px;
-          font-size: 15px;
-          width: 100%;
-          overflow: hidden;
-          display: -webkit-box;
-          -webkit-line-clamp: 1;
-          -webkit-box-orient: vertical;
-        }
-        p {
-          margin: 2px;
-          width: 100%;
-          display: flex;
-          justify-content: space-between;
-          padding-right: 10px;
-          .remove {
-            border-radius: 3px;
-            border: 2px solid #fff;
-            width: 65px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-            &:hover {
-              color: #fff;
-              background-color: transparent;
-            }
+        border-radius: 5px;
+        padding: 10px 0;
+        transform: scaleY(1);
+        transform-origin: top;
+        transition: 0.4s;
+        margin-bottom: 10px;
+        animation: card-item-show 0.7s;
+        @keyframes card-item-show {
+          0% {
+            top: -100px;
+            transform: scale(0);
           }
-          .change-buttons {
+          100% {
+            top: 0;
+            transform: scale(1);
+          }
+        }
+        .left {
+          width: 30%;
+          background-color: #fff;
+          margin-left: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          border-radius: 5px;
+          overflow: hidden;
+          img {
+            width: 80%;
+          }
+        }
+        .right {
+          margin-left: 10px;
+          width: 70%;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-start;
+          .title {
+            margin: 5px;
+            font-size: 15px;
+            width: 100%;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+          }
+          p {
+            margin: 2px;
+            width: 100%;
             display: flex;
-            gap: 5px;
-            button {
-              width: 30px;
-              border: 2px solid #fff;
+            justify-content: space-between;
+            padding-right: 10px;
+            .remove {
               border-radius: 3px;
+              border: 2px solid #fff;
+              width: 65px;
               font-weight: 600;
-              font-size: 15px;
-              transition: 0.3s;
               cursor: pointer;
+              transition: 0.2s;
               &:hover {
                 color: #fff;
                 background-color: transparent;
+              }
+            }
+            .change-buttons {
+              display: flex;
+              gap: 5px;
+              button {
+                width: 30px;
+                border: 2px solid #fff;
+                border-radius: 3px;
+                font-weight: 600;
+                font-size: 15px;
+                transition: 0.2s;
+                cursor: pointer;
+                &:hover {
+                  color: #fff;
+                  background-color: transparent;
+                }
               }
             }
           }
@@ -390,7 +395,7 @@
       }
     }
     .total {
-      margin: 5px;
+      margin: 10px;
       color: #fff;
     }
     .buttons {
@@ -408,6 +413,12 @@
         font-weight: 600;
         font-size: 16px;
         cursor: pointer;
+        transition: 0.2s;
+        &:hover {
+          color: rgba(255, 255, 255, 0.884);
+          border: rgba(255, 255, 255, 0.781) 3px solid;
+          background-color: rgb(26, 37, 46);
+        }
       }
     }
   }

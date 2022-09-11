@@ -21,14 +21,19 @@ export default function Profile() {
       <div className="profile-page">
         <div className="left-side">
           <div className="top">
+            <img src={userData.coverImage} alt="" />
+          </div>
+          <div className="image">
             <img src={userData.userImage} alt="user" />
           </div>
           <div className="bottom">
             <h1>{userData.username}</h1>
-            <h4>{userData.userAge} Years Old</h4>
+            <h3><span>Age:</span> {userData.userAge} Years Old</h3>
+            <h3><span>Address:</span> {userData.address}</h3>
+            <h3><span>Phone:</span> {userData.phone}</h3>
           </div>
         </div>
-        <div className="right-side">
+        <div className="center-side">
           <h1 className="favourite-title">Favourite List</h1>
           <div className="favourite-list">
             <hr />
@@ -81,6 +86,10 @@ export default function Profile() {
               );
             })}
           </div>
+        </div>
+        <div className="right-side">
+          <h1 className="orders-title">Your Orders</h1>
+          <hr />
         </div>
       </div>
     </>

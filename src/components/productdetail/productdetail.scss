@@ -60,10 +60,12 @@
       .description {
         width: 600px;
       }
-      .price-count {
-        width: 600px;
-        display: flex;
-        justify-content: space-between;
+      span {
+        font-weight: 800;
+      }
+      .span-description {
+        display: block;
+        margin-bottom: 10px;
       }
       .buttons {
         position: absolute;

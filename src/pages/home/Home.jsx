@@ -1,27 +1,39 @@
-import { useRef, useEffect, useState, useContext } from "react";
-import { Link } from "react-router-dom";
+import { useRef, useEffect, useContext } from "react";
 import "./home.scss";
 import { appContext } from "../../context/AppContext";
 import BundleImage from "../../images/home-bundle.png";
 import Navbar from "../../components/navbar/Navbar";
-
 const Home = () => {
-  const { productData, showItems, goRight, goLeft } = useContext(appContext);
-  const firstSectionRef = useRef(null);
+  const { productData, showItems, randomSortedProductData , getArrows , showMore } =
+    useContext(appContext);
   const autoMove = useRef(true);
-  let currentProductSection1 = useRef(0);
-
+  const firstSectionRef = useRef(null);
+  const laptopsRef = useRef(null);
+  const keyboardsRef = useRef(null);
+  const mousesRef = useRef(null);
+  const headphonesRef = useRef(null);
+  const firstSection = useRef(0);
+  const laptopsSectionCount = useRef(0);
+  const keyboardsSectionCount = useRef(0);
+  const mousesSectionCount = useRef(0);
+  const headphonesSectionCount = useRef(0);
+  const keyboards = productData.filter((prod) => prod.category === "keyboard");
+  const mouses = productData.filter((prod) => prod.category === "mouse");
+  const laptops = productData.filter((prod) => prod.category === "laptop");
+  const headphones = productData.filter(
+    (prod) => prod.category === "headphone"
+  );
   useEffect(() => {
     if (window.matchMedia("(max-width: 480px)").matches) {
     } else {
       setInterval(() => {
         if (autoMove.current) {
-          if (currentProductSection1.current < productData.length - 5) {
+          if (firstSection.current < productData.length - 5) {
             firstSectionRef.current.style.transform += "translateX(-320px)";
-            currentProductSection1.current += 1;
+            firstSection.current += 1;
           } else {
             firstSectionRef.current.style.transform = "translateX(0)";
-            currentProductSection1.current = 0;
+            firstSection.current = 0;
           }
         }
       }, 3000);
@@ -30,11 +42,6 @@ const Home = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
-  let keyboards = productData.filter((prod) => prod.category === "keyboard");
-  let mouses = productData.filter((prod) => prod.category === "mouse");
-  let laptops = productData.filter((prod) => prod.category === "laptop");
-  let headphones = productData.filter((prod) => prod.category === "headphone");
-
   //  functions
 
   return (
@@ -59,40 +66,42 @@ const Home = () => {
           }}
         >
           <div ref={firstSectionRef} className="products-line">
-            {showItems(productData)}
+            {showItems(randomSortedProductData)}
           </div>
-          <div
-            className="arrow right-arrow"
-            onClick={() => {
-              goRight(productData, firstSectionRef, currentProductSection1);
-            }}
-          >
-            <i className="fa-solid fa-arrow-right"></i>
-          </div>
-          <div
-            className="arrow left-arrow"
-            onClick={() => {
-              goLeft(productData, firstSectionRef, currentProductSection1);
-            }}
-          >
-            <i className="fa-solid fa-arrow-left"></i>
-          </div>
+          {getArrows(randomSortedProductData, firstSectionRef, firstSection)}
+          {showMore(firstSectionRef)}
         </section>
         <section className="section">
           <div className="section-title">Top Laptops</div>
-          <div className="products-line">{showItems(laptops)}</div>
+          <div ref={laptopsRef} className="products-line">
+            {showItems(laptops)}
+          </div>
+          {getArrows(laptops, laptopsRef, laptopsSectionCount)}
+          {showMore(laptopsRef)}
         </section>
         <section className="section">
           <div className="section-title">Keyboards for you</div>
-          <div className="products-line">{showItems(keyboards)}</div>
+          <div ref={keyboardsRef} className="products-line">
+            {showItems(keyboards)}
+          </div>
+          {getArrows(keyboards, keyboardsRef, keyboardsSectionCount)}
+          {showMore(keyboardsRef)}
         </section>
         <section className="section">
-          <div className="section-title">Mouses for you</div>
-          <div className="products-line">{showItems(mouses)}</div>
+          <div className="section-title">New Mouses</div>
+          <div ref={mousesRef} className="products-line">
+            {showItems(mouses)}
+          </div>
+          {getArrows(mouses, mousesRef, mousesSectionCount)}
+          {showMore(mousesRef)}
         </section>
         <section className="section">
-          <div className="section-title">Headphones for you</div>
-          <div className="products-line">{showItems(headphones)}</div>
+          <div className="section-title">Special Headphones</div>
+          <div ref={headphonesRef} className="products-line">
+            {showItems(headphones)}
+          </div>
+          {getArrows(headphones, headphonesRef, headphonesSectionCount)}
+          {showMore(headphonesRef)}
         </section>
       </div>
     </div>

@@ -14,6 +14,9 @@ export default function ProductDetail() {
     goLeft,
     addToCart,
     getStars,
+    getArrows,
+    showMore,
+    randomSortedProductData,
   } = useContext(appContext);
   const { productId } = useParams();
   const currentProduct = productData.find((prod) => prod.id === productId);
@@ -30,10 +33,10 @@ export default function ProductDetail() {
   );
 
   useEffect(() => {
-    setFavourite(productData[currentProduct.id - 1].favourite)
-    setProductImage(currentProduct.images[0])
+    setFavourite(productData[currentProduct.id - 1].favourite);
+    setProductImage(currentProduct.images[0]);
     window.scrollTo(0, 0);
-  }, [productId]);
+  }, [currentProduct.id, currentProduct.images, productData, productId]);
 
   const changeImage = (e) => {
     let image = e.target.getAttribute("data-image");
@@ -44,9 +47,10 @@ export default function ProductDetail() {
     let newData = productData;
     newData[currentProduct.id - 1].favourite =
       !newData[currentProduct.id - 1].favourite;
-      setProductData(newData);
+    setProductData(newData);
     setFavourite(!favourite);
     setFavouriteList(productData.filter((product) => product.favourite));
+    console.log(newData);
   };
   return (
     <div className="product-page">
@@ -82,22 +86,30 @@ export default function ProductDetail() {
           <div className="title-view">
             <h1 className="title">{currentProduct.title}</h1>
           </div>
+
           <div className="rating">
             <div className="stars">
               {getStars(currentProduct)} ({currentProduct.raters})
             </div>
           </div>
-          <p className="description">{currentProduct.description}</p>
-          <div className="price-count">
-            <p className="price">Price: $ {currentProduct.price}</p>
-            <p
-              className={`count ${
-                currentProduct.count >= 5 ? "high" : "medium"
-              } ${currentProduct.count <= 2 && "low"}`}
-            >
-              Quantity: {currentProduct.count}
-            </p>
-          </div>
+          <p className="category">
+            <span>Category:</span> {currentProduct.category}
+          </p>
+          <p className="description">
+            <span className="span-description">Description: </span>{" "}
+            {currentProduct.description}
+          </p>
+          <p className="price">
+            <span>Price:</span> ${currentProduct.price}
+          </p>
+          <p
+            className={`count ${
+              currentProduct.count >= 5 ? "high" : "medium"
+            } ${currentProduct.count <= 2 && "low"}`}
+          >
+            <span>Quantity: </span>
+            {currentProduct.count}
+          </p>
           <div className="buttons">
             <button
               onClick={() => {
@@ -119,47 +131,23 @@ export default function ProductDetail() {
       </div>
       <div className="section">
         <div className="section-title">Similar Products</div>
-        <div
-          className="arrow right-arrow"
-          onClick={() => {
-            goRight(categoryList, similarItemsSection, similarItemsNum);
-          }}
-        >
-          <i className="fa-solid fa-arrow-right"></i>
-        </div>
-        <div
-          className="arrow left-arrow"
-          onClick={() => {
-            goLeft(categoryList, similarItemsSection, similarItemsNum);
-          }}
-        >
-          <i className="fa-solid fa-arrow-left"></i>
-        </div>
         <div ref={similarItemsSection} className="products-line">
           {showItems(categoryList)}
         </div>
+        {getArrows(categoryList, similarItemsSection, similarItemsNum)}
+        {showMore(similarItemsSection)}
       </div>
       <div className="section">
         <div className="section-title">You May Also Like </div>
-        <div
-          className="arrow right-arrow"
-          onClick={() => {
-            goRight(productData, YouMayAlsoLikeSection, YouMayAlsoLikeNum);
-          }}
-        >
-          <i className="fa-solid fa-arrow-right"></i>
-        </div>
-        <div
-          className="arrow left-arrow"
-          onClick={() => {
-            goLeft(productData, YouMayAlsoLikeSection, YouMayAlsoLikeNum);
-          }}
-        >
-          <i className="fa-solid fa-arrow-left"></i>
-        </div>
         <div ref={YouMayAlsoLikeSection} className="products-line">
           {showItems(productData)}
         </div>
+        {getArrows(
+          randomSortedProductData,
+          YouMayAlsoLikeSection,
+          YouMayAlsoLikeNum
+        )}
+        {showMore(YouMayAlsoLikeSection)}
       </div>
     </div>
   );

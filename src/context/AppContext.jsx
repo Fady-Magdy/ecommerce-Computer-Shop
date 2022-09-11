@@ -14,9 +14,13 @@ export default function AppContextProvider(props) {
   const [favouriteList, setFavouriteList] = useState([]);
   const [productData, setProductData] = useState(ProductData);
   const [userData, setUserData] = useState(UserData);
+  const [checkOut, setCheckOut] = useState(true);
+  const randomSortedProductData = Array.from(productData);
+  randomSortedProductData.sort((a, b) => 0.5 - Math.random());
   useEffect(() => {
     setFavouriteList(productData.filter((product) => product.favourite));
   }, []);
+
   //  Functions
   const getStars = (prod) => {
     let stars = [];
@@ -30,6 +34,43 @@ export default function AppContextProvider(props) {
       ratingCount++;
     }
     return stars;
+  };
+  const getArrows = (list, ref, count) => {
+    return (
+      <>
+        <div
+          className="arrow right-arrow"
+          onClick={() => {
+            goRight(list, ref, count);
+          }}
+        >
+          <i className="fa-solid fa-arrow-right"></i>
+        </div>
+        <div
+          className="arrow left-arrow"
+          onClick={() => {
+            goLeft(list, ref, count);
+          }}
+        >
+          <i className="fa-solid fa-arrow-left"></i>
+        </div>
+      </>
+    );
+  };
+  const showMore = (ref) => {
+    return (
+      <>
+        <div
+          onClick={() => {
+            ref.current.style.height = "auto";
+            ref.current.parentNode.lastChild.style.display = "none"
+          }}
+          className="show-more"
+        >
+          Show More
+        </div>
+      </>
+    );
   };
   const addToCart = (prod) => {
     if (!prod.addedToCart) {
@@ -52,6 +93,54 @@ export default function AppContextProvider(props) {
       setProductData(newData);
     }
   };
+  function increaseQuantity(e) {
+    let avQuantity = +e.target.getAttribute("data-avquantity");
+    let quantity = +e.target.getAttribute("data-quantity");
+    if (quantity < avQuantity) {
+      let newCartData = cartData;
+      let originalPrice = newCartData[e.target.value - 1].originalPrice;
+      newCartData[e.target.value - 1].quantity += 1;
+      newCartData[e.target.value - 1].price += originalPrice;
+      setCartData(newCartData);
+
+      let newTotalPrice = 0;
+      for (let i = 0; i < newCartData.length; i++) {
+        newTotalPrice += newCartData[i].price;
+      }
+      setCartTotalPrice(newTotalPrice);
+    }
+  }
+  function decreaseQuantity(e) {
+    let quantity = e.target.getAttribute("data-quantity");
+    if (quantity > 1) {
+      let newCartData = cartData;
+      let originalPrice = newCartData[e.target.value - 1].originalPrice;
+      newCartData[e.target.value - 1].quantity -= 1;
+      newCartData[e.target.value - 1].price -= originalPrice;
+      setCartData(newCartData);
+
+      let newTotalPrice = 0;
+      for (let i = 0; i < newCartData.length; i++) {
+        newTotalPrice += newCartData[i].price;
+      }
+      setCartTotalPrice(newTotalPrice);
+    }
+  }
+  function removeItem(e) {
+    let newData = productData;
+    newData[e.target.id - 1].addedToCart = false;
+    setProductData(newData);
+    let newCartData = cartData;
+    newCartData.splice(e.target.value - 1, 1);
+    setCartData(newCartData);
+    setOrdersCount((prev) => prev - 1);
+
+    let newTotalPrice = 0;
+    for (let i = 0; i < newCartData.length; i++) {
+      newTotalPrice += newCartData[i].price;
+    }
+    setCartTotalPrice(newTotalPrice);
+  }
   const goRight = (list, ref, sectionNum) => {
     if (sectionNum.current < list.length - 5) {
       ref.current.style.transform += "translateX(-320px)";
@@ -126,6 +215,14 @@ export default function AppContextProvider(props) {
     getStars,
     userData,
     setUserData,
+    checkOut,
+    setCheckOut,
+    removeItem,
+    increaseQuantity,
+    decreaseQuantity,
+    randomSortedProductData,
+    getArrows,
+    showMore,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>
