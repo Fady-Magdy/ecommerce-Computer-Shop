@@ -57,7 +57,7 @@ const Product = () => {
                         product.count >= 5 ? "high" : "medium"
                       } ${product.count <= 2 && "low"}`}
                     >
-                      Quantity: {product.count}
+                      {product.count} In Stock
                     </p>
                   </div>
                 </div>

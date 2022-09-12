@@ -8,6 +8,7 @@
     display: flex;
     width: 80%;
     .left {
+      position: relative;
       width: 600px;
       aspect-ratio: 1/1;
       border-radius: 10px;
@@ -25,11 +26,36 @@
         border-radius: 10px;
         overflow: hidden;
         img {
-          width: 90%;
+          width: 80%;
           transition: 0.5s;
           &:hover {
             scale: 1.1;
           }
+        }
+      }
+      .scaled-image {
+        width: 800px;
+        aspect-ratio: 1/1;
+        position: absolute;
+        left: 110%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #fff;
+        z-index: 2;
+        border: 5px solid rgba(0, 0, 0, 0.164);
+        border-radius: 5px;
+        transition: 0.3s;
+        overflow: hidden;
+        opacity: 0;
+        img {
+          width: 100%;
+        }
+        &.show {
+          opacity: 1;
+        }
+        &.remove {
+          display: none;
         }
       }
       .switch-images {
@@ -43,12 +69,17 @@
           display: flex;
           justify-content: center;
           align-items: center;
-          border: 3px solid rgb(211, 211, 211);
+          border: 3px solid rgb(184, 184, 184);
           border-radius: 5px;
           overflow: hidden;
+          transition: 0.2s;
+          opacity: 0.6;
           cursor: pointer;
           img {
             width: 80%;
+          }
+          &:hover {
+            opacity: 1;
           }
         }
       }
@@ -86,13 +117,16 @@
           transition: 0.3s;
           &:hover {
             filter: brightness(1.4);
-            scale: 1.1;
           }
         }
         .favourite {
           i {
             font-size: 30px;
             cursor: pointer;
+            transition: 0.2s;
+            &:hover {
+              opacity: 0.7;
+            }
           }
           .favourite-on {
             color: red;

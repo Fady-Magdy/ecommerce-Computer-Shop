@@ -15,8 +15,8 @@ export default function Navbar() {
     setCartTotalPrice,
     productData,
     setProductData,
-    ordersCount,
-    setOrdersCount,
+    cartCount,
+    setCartCount,
     notificationCount,
     userData,
     checkOut,
@@ -110,7 +110,7 @@ export default function Navbar() {
           }}
         >
           <i className="fa-solid fa-cart-shopping"></i>
-          <p>{ordersCount}</p>
+          <p>{cartCount}</p>
         </div>
 
         {!mobileView && (
@@ -220,7 +220,7 @@ export default function Navbar() {
                   });
                   setProductData(newData);
                   setCartData([]);
-                  setOrdersCount(0);
+                  setCartCount(0);
                   setCartTotalPrice(0);
                 }}
               >
@@ -260,11 +260,19 @@ export default function Navbar() {
               </Link>
             </li>
             <li>
-              <Link className="menu-item" to="">
+              <Link className="menu-item" to="/profile">
                 <div className="icon">
                   <i className="fa-solid fa-bag-shopping"></i>
                 </div>{" "}
                 <p>Orders</p>
+              </Link>
+            </li>
+            <li>
+              <Link className="menu-item" to="/profile">
+                <div className="icon">
+                  <i className="fa-solid fa-heart"></i>
+                </div>{" "}
+                <p>Favorites</p>
               </Link>
             </li>
           </div>
@@ -329,7 +337,8 @@ export default function Navbar() {
           </div>
         </ul>
       </div>
-      {checkOut && <CheckOut />}
+      {checkOut && <div onClick={() => {setCheckOut(false)}} className="dark-bg"></div>}
+      <CheckOut />
     </div>
   );
 }

@@ -5,8 +5,15 @@ import Navbar from "../../components/navbar/Navbar";
 import { useContext } from "react";
 import { appContext } from "../../context/AppContext";
 export default function Profile() {
-  const { favouriteList, setFavouriteList, addToCart, getStars ,userData} =
-    useContext(appContext);
+  const {
+    favouriteList,
+    setFavouriteList,
+    addToCart,
+    getStars,
+    userData,
+    ordersData,
+    cancleOrder
+  } = useContext(appContext);
   const removeFromFavourite = (currentProductId) => {
     let newFavouriteList = favouriteList;
     newFavouriteList = newFavouriteList.filter(
@@ -28,9 +35,15 @@ export default function Profile() {
           </div>
           <div className="bottom">
             <h1>{userData.username}</h1>
-            <h3><span>Age:</span> {userData.userAge} Years Old</h3>
-            <h3><span>Address:</span> {userData.address}</h3>
-            <h3><span>Phone:</span> {userData.phone}</h3>
+            <h3>
+              <span>Age:</span> {userData.userAge} Years Old
+            </h3>
+            <h3>
+              <span>Address:</span> {userData.address}
+            </h3>
+            <h3>
+              <span>Phone:</span> {userData.phone}
+            </h3>
           </div>
         </div>
         <div className="center-side">
@@ -59,7 +72,13 @@ export default function Profile() {
                         </div>
                         <div className="price-count">
                           <p className="price">Price: ${item.price} </p>
-                          <p className={`count ${item.count >= 5 ? "high" : "low"}`}>Quantity: {item.count}</p>
+                          <p
+                            className={`count ${
+                              item.count >= 5 ? "high" : "low"
+                            }`}
+                          >
+                            {item.count} In Stock
+                          </p>
                         </div>
                       </div>
                     </div>
@@ -90,6 +109,58 @@ export default function Profile() {
         <div className="right-side">
           <h1 className="orders-title">Your Orders</h1>
           <hr />
+          <div className="orders-list">
+            {ordersData.length === 0 && (
+              <h3 className="empty-list">You Don't have orders</h3>
+            )}
+            {ordersData.map((item) => {
+              return (
+                <div key={Math.floor(Math.random() * 100 )}>
+                  <div className="order-item">
+                    <div className="left">
+                      <div className="image">
+                        <img src={item.image} alt="order-item" />
+                      </div>
+                      <div className="center">
+                        <Link to={`/product/${item.id}`}>
+                          <h3 className="title">{item.title}</h3>
+                        </Link>
+                        <div className="price-count">
+                          <p className="price">Price: ${item.price} </p>
+                          <p
+                            className="count"
+                          >
+                            Quantity: {item.quantity}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="right">
+                      <button
+                        onClick={() => {
+                          cancleOrder(item.id);
+                        }}
+                      >
+                        Cancle Order
+                      </button>
+                      <Link to={`/product/${item.id}`}>
+                        {" "}
+                        <button
+                          onClick={() => {
+                            addToCart(item);
+                          }}
+                        >
+                          Buy it Again
+                        </button>
+                      </Link>
+                    </div>
+                  </div>
+                  <hr />
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </>

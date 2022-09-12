@@ -403,7 +403,7 @@ export default [
       "https://www.tamata.com/media/catalog/product/cache/b1b762920b4f64fe70902904558ecc11/a/j/ajeadalsad5-2-2021-z-16-2.jpg",
     ],
     description:
-      "Havit MS1010 Ergonomico Gamer Raton De Juego Backlit Wired Rgb Gaming Mouse For Laptop black",
+      "Havit MS1010 Ergonomico Gamer Raton De Juego Backlit Wired Rgb Gaming Mouse black",
     count: 34,
     rating: 4,
     raters: 37,
@@ -527,7 +527,7 @@ export default [
       "https://m.media-amazon.com/images/I/619KnAWyauL._AC_SX679_.jpg",
     ],
     description:
-      "Fantech Programmable USB Gaming Mouse For PC and Laptop - X9 THOR Chroma Black",
+      "Fantech Programmable USB Gaming Mouse For PC - X9 THOR Chroma Black",
     count: 16,
     rating: 3,
     raters: 12,
@@ -598,7 +598,7 @@ export default [
       "https://m.media-amazon.com/images/I/71gW5J9ynJL._AC_SX679_.jpg",
     ],
     description:
-      "PS5 PS4 Headset, INSMART PC Gaming Headset Over-Ear Gaming Headphones with Mic LED Light Noise Cancelling & Volume Control for Laptop Mac New Xbox One PS4 PS5 (3.5mm Splitter Cable Included)",
+      "PS5 PS4 Headset, INSMART PC Gaming Headset Over-Ear Gaming Headphones with Mic LED Light Noise Cancelling & Volume Control New Xbox One PS4 PS5 (3.5mm Splitter Cable Included)",
     count: 12,
     rating: 4,
     raters: 18,

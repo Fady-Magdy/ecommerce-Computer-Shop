@@ -7,21 +7,28 @@ export const appContext = createContext();
 
 export default function AppContextProvider(props) {
   const [cartData, setCartData] = useState([]);
+  const [productData, setProductData] = useState(ProductData);
+  const [ordersData, setOrdersData] = useState([]);
   const [searchValue, setSearchValue] = useState("");
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
-  const [ordersCount, setOrdersCount] = useState(0);
+  const [cartCount, setCartCount] = useState(0);
   const [notificationCount, setNotificationCount] = useState(0);
   const [favouriteList, setFavouriteList] = useState([]);
-  const [productData, setProductData] = useState(ProductData);
   const [userData, setUserData] = useState(UserData);
-  const [checkOut, setCheckOut] = useState(true);
-  const randomSortedProductData = Array.from(productData);
-  randomSortedProductData.sort((a, b) => 0.5 - Math.random());
+  const [checkOut, setCheckOut] = useState(false);
+  const [randomSortedProductData , setRandomSortedProductData] = useState(Array.from(productData))
+
   useEffect(() => {
+    setRandomSortedProductData(randomSortedProductData.sort((a, b) => 0.5 - Math.random()))
     setFavouriteList(productData.filter((product) => product.favourite));
   }, []);
 
   //  Functions
+  const cancleOrder = (index) => {
+    let newOrdersList = ordersData;
+    newOrdersList = newOrdersList.filter((product) => product.id !== index);
+    setOrdersData(newOrdersList);
+  };
   const getStars = (prod) => {
     let stars = [];
     let ratingCount = 0;
@@ -63,7 +70,7 @@ export default function AppContextProvider(props) {
         <div
           onClick={() => {
             ref.current.style.height = "auto";
-            ref.current.parentNode.lastChild.style.display = "none"
+            ref.current.parentNode.lastChild.style.display = "none";
           }}
           className="show-more"
         >
@@ -74,7 +81,7 @@ export default function AppContextProvider(props) {
   };
   const addToCart = (prod) => {
     if (!prod.addedToCart) {
-      setOrdersCount((prev) => prev + 1);
+      setCartCount((prev) => prev + 1);
       setCartData((prev) => [
         ...prev,
         {
@@ -133,7 +140,7 @@ export default function AppContextProvider(props) {
     let newCartData = cartData;
     newCartData.splice(e.target.value - 1, 1);
     setCartData(newCartData);
-    setOrdersCount((prev) => prev - 1);
+    setCartCount((prev) => prev - 1);
 
     let newTotalPrice = 0;
     for (let i = 0; i < newCartData.length; i++) {
@@ -142,14 +149,14 @@ export default function AppContextProvider(props) {
     setCartTotalPrice(newTotalPrice);
   }
   const goRight = (list, ref, sectionNum) => {
-    if (sectionNum.current < list.length - 5) {
-      ref.current.style.transform += "translateX(-320px)";
+    if (sectionNum.current < list.length - 6) {
+      ref.current.style.transform += "translateX(-308px)";
       sectionNum.current += 1;
     }
   };
   const goLeft = (list, ref, sectionNum) => {
     if (sectionNum.current > 0) {
-      ref.current.style.transform += "translateX(320px)";
+      ref.current.style.transform += "translateX(308px)";
       sectionNum.current -= 1;
     }
   };
@@ -184,7 +191,7 @@ export default function AppContextProvider(props) {
             <div className="price-count">
               <p className="price">Price: ${product.price}</p>
               <p className={`count ${product.count >= 5 ? "high" : "low"}`}>
-                Quantity: {product.count}
+              {product.count} In Stock
               </p>
             </div>
           </div>
@@ -202,8 +209,8 @@ export default function AppContextProvider(props) {
     setCartTotalPrice,
     productData,
     setProductData,
-    ordersCount,
-    setOrdersCount,
+    cartCount,
+    setCartCount,
     notificationCount,
     setNotificationCount,
     favouriteList,
@@ -223,6 +230,9 @@ export default function AppContextProvider(props) {
     randomSortedProductData,
     getArrows,
     showMore,
+    ordersData,
+    setOrdersData,
+    cancleOrder,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

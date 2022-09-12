@@ -28,8 +28,8 @@ const Home = () => {
     } else {
       setInterval(() => {
         if (autoMove.current) {
-          if (firstSection.current < productData.length - 5) {
-            firstSectionRef.current.style.transform += "translateX(-320px)";
+          if (firstSection.current < productData.length - 6) {
+            firstSectionRef.current.style.transform += "translateX(-308px)";
             firstSection.current += 1;
           } else {
             firstSectionRef.current.style.transform = "translateX(0)";

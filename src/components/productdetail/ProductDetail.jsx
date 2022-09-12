@@ -10,8 +10,6 @@ export default function ProductDetail() {
     setProductData,
     setFavouriteList,
     showItems,
-    goRight,
-    goLeft,
     addToCart,
     getStars,
     getArrows,
@@ -23,26 +21,33 @@ export default function ProductDetail() {
   const [productImage, setProductImage] = useState(currentProduct.images[0]);
   const similarItemsSection = useRef(null);
   const YouMayAlsoLikeSection = useRef(null);
+  const imageRef = useRef(null);
   const similarItemsNum = useRef(0);
   const YouMayAlsoLikeNum = useRef(0);
+  const [showScaledImage, setShowScaledImage] = useState(false);
   const [favourite, setFavourite] = useState(
     productData[currentProduct.id - 1].favourite
   );
+  const [showImageTimeout, setShowImageTimeout] = useState();
   let categoryList = productData.filter(
     (prod) => prod.category === currentProduct.category
   );
-
   useEffect(() => {
     setFavourite(productData[currentProduct.id - 1].favourite);
     setProductImage(currentProduct.images[0]);
     window.scrollTo(0, 0);
   }, [currentProduct.id, currentProduct.images, productData, productId]);
-
   const changeImage = (e) => {
     let image = e.target.getAttribute("data-image");
     setProductImage(image);
   };
-
+  useEffect(() => {
+    !showScaledImage &&
+      setTimeout(() => {
+        setShowImageTimeout(false);
+      }, 300);
+    showScaledImage && setShowImageTimeout(true);
+  }, [showScaledImage]);
   const addToFavourite = () => {
     let newData = productData;
     newData[currentProduct.id - 1].favourite =
@@ -57,18 +62,38 @@ export default function ProductDetail() {
       <Navbar />
       <div className="product-details">
         <div className="left">
-          <div className="main-image">
+          <div
+            onMouseEnter={() => {
+              setShowScaledImage(true);
+            }}
+            onMouseLeave={() => {
+              setShowScaledImage(false);
+            }}
+            className="main-image"
+          >
             <img src={productImage} alt="product" />
           </div>
+          {
+            <div
+              className={`scaled-image ${showScaledImage ? "show" : ""} ${
+                showImageTimeout ? "" : "remove"
+              } `}
+            >
+              <img src={productImage} alt="" />
+            </div>
+          }
           <div className="switch-images">
             {currentProduct.images.map((image) => {
               return (
                 <div
+                  onClick={changeImage}
                   key={currentProduct.images.indexOf(image)}
                   className="image"
+                  data-image={
+                    currentProduct.images[currentProduct.images.indexOf(image)]
+                  }
                 >
                   <img
-                    onClick={changeImage}
                     src={image}
                     alt="product"
                     data-image={
@@ -96,18 +121,14 @@ export default function ProductDetail() {
             <span>Category:</span> {currentProduct.category}
           </p>
           <p className="description">
-            <span className="span-description">Description: </span>{" "}
+            <span className="span-description">Details: </span>{" "}
             {currentProduct.description}
           </p>
           <p className="price">
             <span>Price:</span> ${currentProduct.price}
           </p>
-          <p
-            className={`count ${
-              currentProduct.count >= 5 ? "high" : "medium"
-            } ${currentProduct.count <= 2 && "low"}`}
-          >
-            <span>Quantity: </span>
+          <p className={`count ${currentProduct.count >= 5 ? "high" : "low"}`}>
+            <span>In Stock: </span>
             {currentProduct.count}
           </p>
           <div className="buttons">
@@ -140,7 +161,7 @@ export default function ProductDetail() {
       <div className="section">
         <div className="section-title">You May Also Like </div>
         <div ref={YouMayAlsoLikeSection} className="products-line">
-          {showItems(productData)}
+          {showItems(randomSortedProductData)}
         </div>
         {getArrows(
           randomSortedProductData,
