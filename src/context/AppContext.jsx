@@ -16,14 +16,26 @@ export default function AppContextProvider(props) {
   const [favouriteList, setFavouriteList] = useState([]);
   const [userData, setUserData] = useState(UserData);
   const [checkOut, setCheckOut] = useState(false);
-  const [randomSortedProductData , setRandomSortedProductData] = useState(Array.from(productData))
+  const [notificationList , setNotificationList] = useState([])
+  const [notificationMsgCount, setNotificationMsgCount] = useState(0);
+  const [randomSortedProductData, setRandomSortedProductData] = useState(
+    Array.from(productData)
+  );
 
   useEffect(() => {
-    setRandomSortedProductData(randomSortedProductData.sort((a, b) => 0.5 - Math.random()))
+    setRandomSortedProductData(
+      randomSortedProductData.sort((a, b) => 0.5 - Math.random())
+    );
     setFavouriteList(productData.filter((product) => product.favourite));
   }, []);
 
   //  Functions
+  const sendNotification = (msg , item) => {
+    let newList = notificationList
+    newList.push({id: notificationMsgCount ,message: msg , item: item})
+    setNotificationList(newList)
+    setNotificationMsgCount(prev => prev + 1)
+  };
   const cancleOrder = (index) => {
     let newOrdersList = ordersData;
     newOrdersList = newOrdersList.filter((product) => product.id !== index);
@@ -98,6 +110,9 @@ export default function AppContextProvider(props) {
       let newData = productData;
       newData[prod.id - 1].addedToCart = true;
       setProductData(newData);
+      sendNotification(`Item Added to Cart` , prod.title);
+    }else {
+      sendNotification(`Item Already in Cart`);
     }
   };
   function increaseQuantity(e) {
@@ -191,7 +206,7 @@ export default function AppContextProvider(props) {
             <div className="price-count">
               <p className="price">Price: ${product.price}</p>
               <p className={`count ${product.count >= 5 ? "high" : "low"}`}>
-              {product.count} In Stock
+                {product.count} In Stock
               </p>
             </div>
           </div>
@@ -233,6 +248,9 @@ export default function AppContextProvider(props) {
     ordersData,
     setOrdersData,
     cancleOrder,
+    sendNotification,
+    notificationList,
+    notificationMsgCount
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

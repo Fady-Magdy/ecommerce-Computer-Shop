@@ -12,7 +12,8 @@ export default function Profile() {
     getStars,
     userData,
     ordersData,
-    cancleOrder
+    cancleOrder,
+    sendNotification
   } = useContext(appContext);
   const removeFromFavourite = (currentProductId) => {
     let newFavouriteList = favouriteList;
@@ -87,6 +88,7 @@ export default function Profile() {
                       <button
                         onClick={() => {
                           removeFromFavourite(item.id);
+                          sendNotification("Removed from Favorites" , item.title)
                         }}
                       >
                         Remove

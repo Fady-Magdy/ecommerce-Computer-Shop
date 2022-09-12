@@ -3,6 +3,7 @@ export default [
   {
     id: "1",
     title: "Redragon K512",
+    brand: "Redragon",
     category: "keyboard",
     price: 20,
     images: [
@@ -20,6 +21,7 @@ export default [
   {
     id: "2",
     title: "Redragon H320",
+    brand: "Redragon",
     category: "headphone",
     price: 32,
     images: [
@@ -37,6 +39,7 @@ export default [
   {
     id: "3",
     title: "Razer Basilisk X",
+    brand: "Razer",
     category: "mouse",
     price: 38,
     images: [
@@ -55,6 +58,7 @@ export default [
   {
     id: "4",
     title: "Apple MacBook Pro 2020",
+    brand: "Apple",
     category: "laptop",
     price: 1500,
     images: [
@@ -73,6 +77,7 @@ export default [
   {
     id: "5",
     title: "Lenovo Legion 5",
+    brand: "Lenovo",
     category: "laptop",
     price: 1300,
     images: [
@@ -91,6 +96,7 @@ export default [
   {
     id: "6",
     title: "HyperX Alloy",
+    brand: "HyperX",
     category: "keyboard",
     price: 100,
     images: [
@@ -108,6 +114,7 @@ export default [
   {
     id: "7",
     title: "Redragon K530 Draconic",
+    brand: "Redragon",
     category: "keyboard",
     price: 60,
     images: [
@@ -126,6 +133,7 @@ export default [
   {
     id: "8",
     title: "HP 15-dw3033dx Laptop",
+    brand: "HP",
     category: "laptop",
     price: 600,
     images: [
@@ -144,6 +152,7 @@ export default [
   {
     id: "9",
     title: "HP Laptop 15-dw3014ne",
+    brand: "HP",
     category: "laptop",
     price: 750,
     images: [
@@ -162,6 +171,7 @@ export default [
   {
     id: "10",
     title: "Lenovo V15 IML Laptop",
+    brand: "Lenovo",
     category: "laptop",
     price: 550,
     images: [
@@ -180,6 +190,7 @@ export default [
   {
     id: "11",
     title: "Lenovo IdeaPad Gaming",
+    brand: "Lenovo",
     category: "laptop",
     price: 750,
     images: [
@@ -198,6 +209,7 @@ export default [
   {
     id: "12",
     title: "Apple MacBook Pro 2022",
+    brand: "Apple",
     category: "laptop",
     price: 1650,
     images: [
@@ -216,6 +228,7 @@ export default [
   {
     id: "13",
     title: "Apple Macbook Air 2020",
+    brand: "Apple",
     category: "laptop",
     price: 1450,
     images: [
@@ -234,6 +247,7 @@ export default [
   {
     id: "14",
     title: "Dell G15-5520 Gaming",
+    brand: "Dell",
     category: "laptop",
     price: 1250,
     images: [
@@ -252,6 +266,7 @@ export default [
   {
     id: "15",
     title: "ASUS Vivobook Pro 15",
+    brand: "ASUS",
     category: "laptop",
     price: 1300,
     images: [
@@ -269,6 +284,7 @@ export default [
   {
     id: "16",
     title: "Forev FV-Q3055",
+    brand: "Forev",
     category: "keyboard",
     price: 15,
     images: [
@@ -286,6 +302,7 @@ export default [
   {
     id: "17",
     title: "Logitech G213 Prodigy",
+    brand: "Logitech",
     category: "keyboard",
     price: 80,
     images: [
@@ -305,6 +322,7 @@ export default [
   {
     id: "18",
     title: "Logitech K400 Plus",
+    brand: "Logitech",
     category: "keyboard",
     price: 100,
     images: [
@@ -324,6 +342,7 @@ export default [
   {
     id: "19",
     title: "Logitech G512",
+    brand: "Logitech",
     category: "keyboard",
     price: 110,
     images: [
@@ -342,6 +361,7 @@ export default [
   {
     id: "20",
     title: "Techno Zone E22",
+    brand: "Techno",
     category: "keyboard",
     price: 30,
     images: [
@@ -359,6 +379,7 @@ export default [
   {
     id: "21",
     title: "Meetion K9520",
+    brand: "Meetion",
     category: "keyboard",
     price: 25,
     images: [
@@ -377,6 +398,7 @@ export default [
   {
     id: "22",
     title: "Redragon K552",
+    brand: "Redragon",
     category: "keyboard",
     price: 65,
     images: [
@@ -395,6 +417,7 @@ export default [
   {
     id: "23",
     title: "Havit MS1010 Ergonomico",
+    brand: "HAVIT",
     category: "mouse",
     price: 13,
     images: [
@@ -413,6 +436,7 @@ export default [
   {
     id: "24",
     title: "HAVIT GAMENOTE MS1027",
+    brand: "HAVIT",
     category: "mouse",
     price: 9,
     images: [
@@ -432,6 +456,7 @@ export default [
   {
     id: "25",
     title: "Logitech Corded",
+    brand: "Logitech",
     category: "mouse",
     price: 8,
     images: [
@@ -449,6 +474,7 @@ export default [
   {
     id: "26",
     title: "Microsoft Wireless Mobile",
+    brand: "Microsoft",
     category: "mouse",
     price: 20,
     images: [
@@ -466,6 +492,7 @@ export default [
   {
     id: "27",
     title: "ONIKUMA CW905 RGB",
+    brand: "ONIKUMA",
     category: "mouse",
     price: 12,
     images: [
@@ -484,6 +511,7 @@ export default [
   {
     id: "28",
     title: "Redragon M711 Cobra",
+    brand: "Redragon",
     category: "mouse",
     price: 30,
     images: [
@@ -501,6 +529,7 @@ export default [
   {
     id: "29",
     title: "Redragon M606 MAMBA",
+    brand: "Redragon",
     category: "mouse",
     price: 16,
     images: [
@@ -519,6 +548,7 @@ export default [
   {
     id: "30",
     title: "Fantech X9 THOR",
+    brand: "Fantech",
     category: "mouse",
     price: 10,
     images: [
@@ -537,6 +567,7 @@ export default [
   {
     id: "31",
     title: "M160 HP",
+    brand: "Unknown",
     category: "mouse",
     price: 7,
     images: [
@@ -554,6 +585,7 @@ export default [
   {
     id: "32",
     title: "HAVIT GAMENOTE H656d",
+    brand: "HAVIT",
     category: "headphone",
     price: 20,
     images: [
@@ -572,6 +604,7 @@ export default [
   {
     id: "33",
     title: "TGUS Wireless Gaming",
+    brand: "TGUS",
     category: "headphone",
     price: 16,
     images: [
@@ -590,6 +623,7 @@ export default [
   {
     id: "34",
     title: " INSMART PC Gaming",
+    brand: "INSMART",
     category: "headphone",
     price: 18,
     images: [
@@ -608,6 +642,7 @@ export default [
   {
     id: "35",
     title: "KOTION EACH G7000",
+    brand: "KOTION",
     category: "headphone",
     price: 11,
     images: [
@@ -626,6 +661,7 @@ export default [
   {
     id: "36",
     title: "Redragon H112",
+    brand: "Redragon",
     category: "headphone",
     price: 25,
     images: [
@@ -644,6 +680,7 @@ export default [
   {
     id: "37",
     title: "Redragon H320",
+    brand: "Redragon",
     category: "headphone",
     price: 50,
     images: [
@@ -662,6 +699,7 @@ export default [
   {
     id: "38",
     title: "Redragon H350",
+    brand: "Redragon",
     category: "headphone",
     price: 56,
     images: [
@@ -680,6 +718,7 @@ export default [
   {
     id: "39",
     title: "Luckyu Cat Ear",
+    brand: "Luckyu",
     category: "headphone",
     price: 20,
     images: [
@@ -698,6 +737,7 @@ export default [
   {
     id: "40",
     title: "ONIKUMA K6 Stereo",
+    brand: "ONIKUMA",
     category: "headphone",
     price: 30,
     images: [

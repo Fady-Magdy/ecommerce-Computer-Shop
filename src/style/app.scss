@@ -210,7 +210,7 @@ body {
         width: 30px;
         height: 30px;
         &:hover {
-          border: none;
+          border: 2px solid transparent;
         }
         i {
           font-size: 20px;
@@ -473,6 +473,9 @@ body {
             }
           }
         }
+      }
+      .last-step {
+        font-size: 13px;
       }
     }
   }

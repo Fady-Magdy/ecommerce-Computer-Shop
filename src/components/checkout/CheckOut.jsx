@@ -23,7 +23,7 @@ export default function CheckOut() {
   } = useContext(appContext);
   const count = useRef(0);
   const [steps, setSteps] = useState(1);
-  const [randomYear] = useState(Math.floor(Math.random() * 10 + 1));
+  const [randomYear , setRandomYear] = useState(Math.floor(Math.random() * 10 + 1));
   count.current = 0;
   useEffect(() => {
     if (steps === 3) {
@@ -39,8 +39,12 @@ export default function CheckOut() {
     }
     if (steps === 4) {
       setCheckOut(false);
+      setSteps(1)
     }
-  } , [steps]);
+  } , [cartData, productData, setCartCount, setCartData, setCartTotalPrice, setCheckOut, setOrdersData, setProductData, steps]);
+  useEffect(() => {
+    setRandomYear(Math.floor(Math.random() * 10 + 1))
+  },[steps])
   return (
     <div className={`check-out ${checkOut ? "show" : ""}`}>
       <h1 className="check-out-title">Checkout</h1>

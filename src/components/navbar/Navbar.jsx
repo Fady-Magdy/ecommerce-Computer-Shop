@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import "./navbar.scss";
 import { appContext } from "../../context/AppContext";
 import CheckOut from "../checkout/CheckOut";
+import Notification from "../notification/Notification";
 export default function Navbar() {
   const [mobileView, setMobileView] = useState(false);
   const searchBar = useRef();
@@ -24,6 +25,7 @@ export default function Navbar() {
     removeItem,
     increaseQuantity,
     decreaseQuantity,
+    notificationList,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -34,7 +36,6 @@ export default function Navbar() {
   };
   const count = useRef(0);
   count.current = 0;
-
   useEffect(() => {
     if (window.matchMedia("(max-width: 480px)").matches) {
       setMobileView(true);
@@ -337,8 +338,22 @@ export default function Navbar() {
           </div>
         </ul>
       </div>
-      {checkOut && <div onClick={() => {setCheckOut(false)}} className="dark-bg"></div>}
+      {checkOut && (
+        <div
+          onClick={() => {
+            setCheckOut(false);
+          }}
+          className="dark-bg"
+        ></div>
+      )}
       <CheckOut />
+      <div className="notification-area">
+        {notificationList.reverse().map((msg) => {
+          return (
+            <Notification index={msg.id} key={msg.id} msg={msg.message} item={msg.item} />
+          );
+        })}
+      </div>
     </div>
   );
 }

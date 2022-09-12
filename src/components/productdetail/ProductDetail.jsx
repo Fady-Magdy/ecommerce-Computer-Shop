@@ -14,6 +14,7 @@ export default function ProductDetail() {
     getStars,
     getArrows,
     showMore,
+    sendNotification,
     randomSortedProductData,
   } = useContext(appContext);
   const { productId } = useParams();
@@ -21,7 +22,6 @@ export default function ProductDetail() {
   const [productImage, setProductImage] = useState(currentProduct.images[0]);
   const similarItemsSection = useRef(null);
   const YouMayAlsoLikeSection = useRef(null);
-  const imageRef = useRef(null);
   const similarItemsNum = useRef(0);
   const YouMayAlsoLikeNum = useRef(0);
   const [showScaledImage, setShowScaledImage] = useState(false);
@@ -55,7 +55,10 @@ export default function ProductDetail() {
     setProductData(newData);
     setFavourite(!favourite);
     setFavouriteList(productData.filter((product) => product.favourite));
-    console.log(newData);
+    sendNotification(
+      `${currentProduct.favourite ? "Added to" : "Removed from"} Favorite`,
+      currentProduct.title
+    );
   };
   return (
     <div className="product-page">
@@ -117,6 +120,9 @@ export default function ProductDetail() {
               {getStars(currentProduct)} ({currentProduct.raters})
             </div>
           </div>
+          <p className="category">
+            <span>Brand:</span> {currentProduct.brand}
+          </p>
           <p className="category">
             <span>Category:</span> {currentProduct.category}
           </p>
