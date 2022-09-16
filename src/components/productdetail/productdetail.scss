@@ -9,12 +9,12 @@
     width: 80%;
     .left {
       position: relative;
-      width: 600px;
+      width: 500px;
+      min-width: 350px;
       aspect-ratio: 1/1;
       border-radius: 10px;
       display: flex;
       flex-direction: column;
-      justify-content: center;
       align-items: center;
       .main-image {
         width: 100%;
@@ -34,7 +34,10 @@
         }
       }
       .scaled-image {
-        width: 800px;
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+        width: 45vw;
         aspect-ratio: 1/1;
         position: absolute;
         left: 110%;
@@ -49,7 +52,7 @@
         overflow: hidden;
         opacity: 0;
         img {
-          width: 100%;
+          width: 80%;
         }
         &.show {
           opacity: 1;
@@ -88,8 +91,10 @@
       position: relative;
       margin-left: 50px;
       width: 60%;
+      .title {
+        margin-top: 0;
+      }
       .description {
-        width: 600px;
       }
       span {
         font-weight: 800;
@@ -99,9 +104,6 @@
         margin-bottom: 10px;
       }
       .buttons {
-        position: absolute;
-        bottom: 100px;
-        left: 0;
         display: flex;
         align-items: center;
         .add-to-cart {

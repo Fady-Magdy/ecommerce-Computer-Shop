@@ -17,11 +17,6 @@ const Home = () => {
   const keyboardsRef = useRef(null);
   const mousesRef = useRef(null);
   const headphonesRef = useRef(null);
-  const firstSection = useRef(0);
-  const laptopsSectionCount = useRef(0);
-  const keyboardsSectionCount = useRef(0);
-  const mousesSectionCount = useRef(0);
-  const headphonesSectionCount = useRef(0);
   const keyboards = productData.filter((prod) => prod.category === "keyboard");
   const mouses = productData.filter((prod) => prod.category === "mouse");
   const laptops = productData.filter((prod) => prod.category === "laptop");
@@ -33,13 +28,7 @@ const Home = () => {
     } else {
       setInterval(() => {
         if (autoMove.current) {
-          if (firstSection.current < productData.length - 6) {
-            firstSectionRef.current.style.transform += "translateX(-308px)";
-            firstSection.current += 1;
-          } else {
-            firstSectionRef.current.style.transform = "translateX(0)";
-            firstSection.current = 0;
-          }
+          firstSectionRef.current.scrollBy(308, 0);
         }
       }, 3000);
     }
@@ -73,7 +62,7 @@ const Home = () => {
           <div ref={firstSectionRef} className="products-line">
             {showItems(randomSortedProductData)}
           </div>
-          {getArrows(randomSortedProductData, firstSectionRef, firstSection)}
+          {getArrows(firstSectionRef)}
           {showMore(firstSectionRef)}
         </section>
         <section className="section">
@@ -81,7 +70,7 @@ const Home = () => {
           <div ref={laptopsRef} className="products-line">
             {showItems(laptops)}
           </div>
-          {getArrows(laptops, laptopsRef, laptopsSectionCount)}
+          {getArrows(laptopsRef)}
           {showMore(laptopsRef)}
         </section>
         <section className="section">
@@ -89,7 +78,7 @@ const Home = () => {
           <div ref={keyboardsRef} className="products-line">
             {showItems(keyboards)}
           </div>
-          {getArrows(keyboards, keyboardsRef, keyboardsSectionCount)}
+          {getArrows(keyboardsRef)}
           {showMore(keyboardsRef)}
         </section>
         <section className="section">
@@ -97,7 +86,7 @@ const Home = () => {
           <div ref={mousesRef} className="products-line">
             {showItems(mouses)}
           </div>
-          {getArrows(mouses, mousesRef, mousesSectionCount)}
+          {getArrows(mousesRef)}
           {showMore(mousesRef)}
         </section>
         <section className="section">
@@ -105,7 +94,7 @@ const Home = () => {
           <div ref={headphonesRef} className="products-line">
             {showItems(headphones)}
           </div>
-          {getArrows(headphones, headphonesRef, headphonesSectionCount)}
+          {getArrows(headphonesRef)}
           {showMore(headphonesRef)}
         </section>
       </div>

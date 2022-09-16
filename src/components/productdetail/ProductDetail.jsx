@@ -22,8 +22,6 @@ export default function ProductDetail() {
   const [productImage, setProductImage] = useState(currentProduct.images[0]);
   const similarItemsSection = useRef(null);
   const YouMayAlsoLikeSection = useRef(null);
-  const similarItemsNum = useRef(0);
-  const YouMayAlsoLikeNum = useRef(0);
   const [showScaledImage, setShowScaledImage] = useState(false);
   const [favorite, setfavorite] = useState(
     productData[currentProduct.id - 1].favorite
@@ -161,7 +159,7 @@ export default function ProductDetail() {
         <div ref={similarItemsSection} className="products-line">
           {showItems(categoryList)}
         </div>
-        {getArrows(categoryList, similarItemsSection, similarItemsNum)}
+        {getArrows(similarItemsSection)}
         {showMore(similarItemsSection)}
       </div>
       <div className="section">
@@ -169,11 +167,7 @@ export default function ProductDetail() {
         <div ref={YouMayAlsoLikeSection} className="products-line">
           {showItems(randomSortedProductData)}
         </div>
-        {getArrows(
-          randomSortedProductData,
-          YouMayAlsoLikeSection,
-          YouMayAlsoLikeNum
-        )}
+        {getArrows(YouMayAlsoLikeSection)}
         {showMore(YouMayAlsoLikeSection)}
       </div>
     </div>

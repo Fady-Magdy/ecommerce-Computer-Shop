@@ -21,7 +21,6 @@ export default function AppContextProvider(props) {
   const [randomSortedProductData, setRandomSortedProductData] = useState(
     Array.from(productData)
   );
-
   useEffect(() => {
     setRandomSortedProductData(
       randomSortedProductData.sort((a, b) => 0.5 - Math.random())
@@ -36,7 +35,7 @@ export default function AppContextProvider(props) {
     setNotificationList(newList);
     setNotificationMsgCount((prev) => prev + 1);
   };
-  const cancleOrder = (index) => {
+  const cancelOrder = (index) => {
     let newOrdersList = ordersData;
     newOrdersList = newOrdersList.filter((product) => product.id !== index);
     setOrdersData(newOrdersList);
@@ -54,13 +53,13 @@ export default function AppContextProvider(props) {
     }
     return stars;
   };
-  const getArrows = (list, ref, count) => {
+  const getArrows = (ref) => {
     return (
       <>
         <div
           className="arrow right-arrow"
           onClick={() => {
-            goRight(list, ref, count);
+            goRight(ref);
           }}
         >
           <i className="fa-solid fa-arrow-right"></i>
@@ -68,7 +67,7 @@ export default function AppContextProvider(props) {
         <div
           className="arrow left-arrow"
           onClick={() => {
-            goLeft(list, ref, count);
+            goLeft(ref);
           }}
         >
           <i className="fa-solid fa-arrow-left"></i>
@@ -163,17 +162,11 @@ export default function AppContextProvider(props) {
     }
     setCartTotalPrice(newTotalPrice);
   }
-  const goRight = (list, ref, sectionNum) => {
-    if (sectionNum.current < list.length - 6) {
-      ref.current.style.transform += "translateX(-308px)";
-      sectionNum.current += 1;
-    }
+  const goRight = (ref) => {
+    ref.current.scrollBy(308, 0);
   };
-  const goLeft = (list, ref, sectionNum) => {
-    if (sectionNum.current > 0) {
-      ref.current.style.transform += "translateX(308px)";
-      sectionNum.current -= 1;
-    }
+  const goLeft = (ref) => {
+    ref.current.scrollBy(-308, 0);
   };
   const showItems = (prod) => {
     let result = prod.map((product) => {
@@ -247,7 +240,7 @@ export default function AppContextProvider(props) {
     showMore,
     ordersData,
     setOrdersData,
-    cancleOrder,
+    cancelOrder,
     sendNotification,
     notificationList,
     notificationMsgCount,

@@ -12,7 +12,7 @@ export default function Profile() {
     getStars,
     userData,
     ordersData,
-    cancleOrder,
+    cancelOrder,
     sendNotification,
   } = useContext(appContext);
   const removeFromfavorite = (currentProductId) => {
@@ -37,13 +37,16 @@ export default function Profile() {
           <div className="bottom">
             <h1>{userData.username}</h1>
             <h3>
-              <span>Age:</span> {userData.userAge} Years Old
+              <span className="info-title">Age:</span>
+              <span className="info-text">{userData.userAge} Years Old</span>
             </h3>
             <h3>
-              <span>Address:</span> {userData.address}
+              <span className="info-title">Address:</span>
+              <span className="info-text"> {userData.address}</span>
             </h3>
             <h3>
-              <span>Phone:</span> {userData.phone}
+              <span className="info-title">Phone:</span>
+              <span className="info-text">+2{userData.phone}</span>
             </h3>
           </div>
         </div>
@@ -146,10 +149,11 @@ export default function Profile() {
                       <button
                         className="remove"
                         onClick={() => {
-                          cancleOrder(item.id);
+                          cancelOrder(item.id);
+                          sendNotification("Order Canceled", item.title);
                         }}
                       >
-                        Cancle Order
+                        Cancel Order
                       </button>
                     </div>
                   </div>

@@ -39,7 +39,7 @@ export default function CheckOut() {
       setCartData([]);
       setCartCount(0);
       setCartTotalPrice(0);
-      sendNotification("New Order Submitted" , "You have added new order")
+      sendNotification("New Order Submitted", "You have added new order");
     }
     if (steps === 4) {
       setCheckOut(false);
@@ -181,7 +181,7 @@ export default function CheckOut() {
           }}
           className="next-step"
         >
-          {steps === 1 && "Next Step"} {steps === 2 && "Complete Order"}{" "}
+          {steps === 1 && "Next Step"} {steps === 2 && "Submit Order"}{" "}
           {steps === 3 && "Close"}
         </button>
 

@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 body {
   margin: 0;
@@ -26,13 +27,12 @@ body {
   background-color: rgba(0, 0, 0, 0.507);
 }
 .section {
-  width: 100vw;
+  width: 100%;
   position: relative;
   background-color: rgb(208, 229, 255);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
-  padding: 20px;
+  padding: 20px 0;
   margin-bottom: 40px;
-  overflow: hidden;
   .arrow {
     position: absolute;
     top: 50%;
@@ -64,17 +64,21 @@ body {
     right: 50px;
   }
   .section-title {
-    padding-left: 20px;
+    padding-left: 40px;
     font-weight: 600;
     font-size: 30px;
   }
   .products-line {
-    width: 100vw;
+    width: 100%;
     padding: 30px;
     display: flex;
     align-items: center;
     gap: 20px;
+    overflow: auto;
     transition: 0.7s;
+    &::-webkit-scrollbar {
+      display: none;
+    }
     .product {
       width: 300px;
       min-width: 288px;
@@ -176,7 +180,33 @@ body {
   }
 }
 @media (max-width: 768px) {
-  
+  .App {
+    .product-page {
+      .product-details {
+        margin-top: 80px;
+        flex-direction: column;
+        width: 90%;
+        .left {
+          width: 100%;
+        }
+        .right {
+          width: 100%;
+          margin-left: 0;
+          .title {
+            font-size: 25px;
+            margin-top: 30px;
+            width: 100%;
+          }
+          .description {
+            width: 100%;
+          }
+        }
+        .buttons {
+          position: static;
+        }
+      }
+    }
+  }
 }
 @media (max-width: 480px) {
   .App {
@@ -230,6 +260,7 @@ body {
         display: flex;
         flex-direction: column;
         height: 1400px;
+        overflow: hidden;
         .product {
           width: 80vw;
           margin: 10px 0;
@@ -288,29 +319,6 @@ body {
         }
       }
     }
-    .product-page {
-      .product-details {
-        margin-top: 80px !important;
-        flex-direction: column;
-        width: 90% !important;
-        .left {
-          width: 100% !important;
-        }
-        .right {
-          width: 100% !important;
-          margin-left: 0 !important;
-          .title {
-            width: 100% !important;
-          }
-          .description {
-            width: 100% !important;
-          }
-        }
-        .buttons {
-          position: static !important;
-        }
-      }
-    }
 
     .profile-page {
       flex-direction: column;
@@ -321,6 +329,10 @@ body {
         margin-top: 20px;
         width: 100%;
         min-width: 0;
+        .bottom {
+          margin-top: 20px;
+          padding: 20px;
+        }
       }
       .center-side {
         width: 100%;
