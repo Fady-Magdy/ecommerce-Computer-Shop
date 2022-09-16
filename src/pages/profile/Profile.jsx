@@ -6,21 +6,21 @@ import { useContext } from "react";
 import { appContext } from "../../context/AppContext";
 export default function Profile() {
   const {
-    favouriteList,
-    setFavouriteList,
+    favoriteList,
+    setfavoriteList,
     addToCart,
     getStars,
     userData,
     ordersData,
     cancleOrder,
-    sendNotification
+    sendNotification,
   } = useContext(appContext);
-  const removeFromFavourite = (currentProductId) => {
-    let newFavouriteList = favouriteList;
-    newFavouriteList = newFavouriteList.filter(
+  const removeFromfavorite = (currentProductId) => {
+    let newfavoriteList = favoriteList;
+    newfavoriteList = newfavoriteList.filter(
       (product) => product.id !== currentProductId
     );
-    setFavouriteList(newFavouriteList);
+    setfavoriteList(newfavoriteList);
   };
 
   return (
@@ -48,19 +48,21 @@ export default function Profile() {
           </div>
         </div>
         <div className="center-side">
-          <h1 className="favourite-title">Favourite List</h1>
-          <div className="favourite-list">
+          <h1 className="favorite-title">Favorite List</h1>
+          <div className="favorite-list">
             <hr />
-            {favouriteList.length === 0 && (
-              <h3 className="empty-list">List is Empty</h3>
+            {favoriteList.length === 0 && (
+              <h3 className="empty-list">
+                Your Favorite items will appear here
+              </h3>
             )}
-            {favouriteList.map((item) => {
+            {favoriteList.map((item) => {
               return (
                 <div key={item.id}>
-                  <div className="favourite-item">
+                  <div className="favorite-item">
                     <div className="left">
                       <div className="image">
-                        <img src={item.images[0]} alt="favourite-item" />
+                        <img src={item.images[0]} alt="favorite-item" />
                       </div>
                       <div className="center">
                         <Link to={`/product/${item.id}`}>
@@ -87,18 +89,22 @@ export default function Profile() {
                     <div className="right">
                       <button
                         onClick={() => {
-                          removeFromFavourite(item.id);
-                          sendNotification("Removed from Favorites" , item.title)
-                        }}
-                      >
-                        Remove
-                      </button>
-                      <button
-                        onClick={() => {
                           addToCart(item);
                         }}
                       >
                         Add To Cart
+                      </button>
+                      <button
+                        className="remove"
+                        onClick={() => {
+                          removeFromfavorite(item.id);
+                          sendNotification(
+                            "Removed from Favorites",
+                            item.title
+                          );
+                        }}
+                      >
+                        Remove
                       </button>
                     </div>
                   </div>
@@ -113,11 +119,11 @@ export default function Profile() {
           <hr />
           <div className="orders-list">
             {ordersData.length === 0 && (
-              <h3 className="empty-list">You Don't have orders</h3>
+              <h3 className="empty-list">Your Orders will appear here</h3>
             )}
             {ordersData.map((item) => {
               return (
-                <div key={Math.floor(Math.random() * 100 )}>
+                <div key={Math.floor(Math.random() * 100)}>
                   <div className="order-item">
                     <div className="left">
                       <div className="image">
@@ -129,33 +135,22 @@ export default function Profile() {
                         </Link>
                         <div className="price-count">
                           <p className="price">Price: ${item.price} </p>
-                          <p
-                            className="count"
-                          >
-                            Quantity: {item.quantity}
-                          </p>
+                          <p className="count">Quantity: {item.quantity}</p>
                         </div>
                       </div>
                     </div>
-
                     <div className="right">
+                      <Link to={`/product/${item.id}`}>
+                        <button>Buy it Again</button>
+                      </Link>
                       <button
+                        className="remove"
                         onClick={() => {
                           cancleOrder(item.id);
                         }}
                       >
                         Cancle Order
                       </button>
-                      <Link to={`/product/${item.id}`}>
-                        {" "}
-                        <button
-                          onClick={() => {
-                            addToCart(item);
-                          }}
-                        >
-                          Buy it Again
-                        </button>
-                      </Link>
                     </div>
                   </div>
                   <hr />

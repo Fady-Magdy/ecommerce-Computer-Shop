@@ -8,7 +8,7 @@ export default function ProductDetail() {
   const {
     productData,
     setProductData,
-    setFavouriteList,
+    setfavoriteList,
     showItems,
     addToCart,
     getStars,
@@ -25,15 +25,15 @@ export default function ProductDetail() {
   const similarItemsNum = useRef(0);
   const YouMayAlsoLikeNum = useRef(0);
   const [showScaledImage, setShowScaledImage] = useState(false);
-  const [favourite, setFavourite] = useState(
-    productData[currentProduct.id - 1].favourite
+  const [favorite, setfavorite] = useState(
+    productData[currentProduct.id - 1].favorite
   );
   const [showImageTimeout, setShowImageTimeout] = useState();
   let categoryList = productData.filter(
     (prod) => prod.category === currentProduct.category
   );
   useEffect(() => {
-    setFavourite(productData[currentProduct.id - 1].favourite);
+    setfavorite(productData[currentProduct.id - 1].favorite);
     setProductImage(currentProduct.images[0]);
     window.scrollTo(0, 0);
   }, [currentProduct.id, currentProduct.images, productData, productId]);
@@ -48,15 +48,15 @@ export default function ProductDetail() {
       }, 300);
     showScaledImage && setShowImageTimeout(true);
   }, [showScaledImage]);
-  const addToFavourite = () => {
+  const addTofavorite = () => {
     let newData = productData;
-    newData[currentProduct.id - 1].favourite =
-      !newData[currentProduct.id - 1].favourite;
+    newData[currentProduct.id - 1].favorite =
+      !newData[currentProduct.id - 1].favorite;
     setProductData(newData);
-    setFavourite(!favourite);
-    setFavouriteList(productData.filter((product) => product.favourite));
+    setfavorite(!favorite);
+    setfavoriteList(productData.filter((product) => product.favorite));
     sendNotification(
-      `${currentProduct.favourite ? "Added to" : "Removed from"} Favorite`,
+      `${currentProduct.favorite ? "Added to" : "Removed from"} Favorite`,
       currentProduct.title
     );
   };
@@ -146,9 +146,9 @@ export default function ProductDetail() {
             >
               Add to cart
             </button>
-            <div className="favourite" onClick={addToFavourite}>
-              {favourite ? (
-                <i className="favourite-on fa-solid fa-heart"></i>
+            <div className="favorite" onClick={addTofavorite}>
+              {favorite ? (
+                <i className="favorite-on fa-solid fa-heart"></i>
               ) : (
                 <i className="fa-regular fa-heart"></i>
               )}

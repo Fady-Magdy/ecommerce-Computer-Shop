@@ -20,10 +20,13 @@ export default function CheckOut() {
     productData,
     setProductData,
     setCartCount,
+    sendNotification,
   } = useContext(appContext);
   const count = useRef(0);
   const [steps, setSteps] = useState(1);
-  const [randomYear , setRandomYear] = useState(Math.floor(Math.random() * 10 + 1));
+  const [randomYear, setRandomYear] = useState(
+    Math.floor(Math.random() * 10 + 1)
+  );
   count.current = 0;
   useEffect(() => {
     if (steps === 3) {
@@ -36,15 +39,25 @@ export default function CheckOut() {
       setCartData([]);
       setCartCount(0);
       setCartTotalPrice(0);
+      sendNotification("New Order Submitted" , "You have added new order")
     }
     if (steps === 4) {
       setCheckOut(false);
-      setSteps(1)
+      setSteps(1);
     }
-  } , [cartData, productData, setCartCount, setCartData, setCartTotalPrice, setCheckOut, setOrdersData, setProductData, steps]);
+  }, [
+    productData,
+    setCartCount,
+    setCartData,
+    setCartTotalPrice,
+    setCheckOut,
+    setOrdersData,
+    setProductData,
+    steps,
+  ]);
   useEffect(() => {
-    setRandomYear(Math.floor(Math.random() * 10 + 1))
-  },[steps])
+    setRandomYear(Math.floor(Math.random() * 10 + 2));
+  }, [steps]);
   return (
     <div className={`check-out ${checkOut ? "show" : ""}`}>
       <h1 className="check-out-title">Checkout</h1>
@@ -117,7 +130,7 @@ export default function CheckOut() {
           <div className="step2-container">
             <h2>Check you info before submitting</h2>
             <div className="checkout-user-detail">
-              <h3>You Name: </h3>
+              <h3>Your Name: </h3>
               <span className="">{userData.username}</span>
             </div>
             <div className="checkout-user-detail">
@@ -144,13 +157,14 @@ export default function CheckOut() {
       )}
       {steps === 3 && (
         <div className="last-step">
-          <h1>Thank You</h1>
+          <h1 className="success">Success</h1>
           <h2>You order will arrive in {randomYear} Years</h2>
           <h3>Because we don't have any product</h3>
         </div>
       )}
       <div
         onClick={() => {
+          setSteps(1);
           setCheckOut(false);
         }}
         className="exit"

@@ -175,6 +175,9 @@ body {
     color: rgb(255, 86, 86);
   }
 }
+@media (max-width: 768px) {
+  
+}
 @media (max-width: 480px) {
   .App {
     .navbar {
@@ -312,14 +315,18 @@ body {
     .profile-page {
       flex-direction: column;
       height: auto;
+      flex-wrap: nowrap;
+      padding: 20px;
       .left-side {
-        margin-top: 30px;
+        margin-top: 20px;
         width: 100%;
+        min-width: 0;
       }
       .center-side {
         width: 100%;
-        .favourite-list {
-          .favourite-item {
+        min-width: 0;
+        .favorite-list {
+          .favorite-item {
             padding: 10px 20px;
             .left {
               .image {
@@ -359,6 +366,7 @@ body {
       }
       .right-side {
         width: 100%;
+        min-width: 0;
         .orders-list {
           .order-item {
             margin-top: 5px;

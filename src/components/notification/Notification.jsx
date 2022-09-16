@@ -1,6 +1,6 @@
 import React from "react";
-import './notification.scss'
-import { useContext ,useEffect , useRef } from "react";
+import "./notification.scss";
+import { useContext, useEffect, useRef } from "react";
 import { appContext } from "../../context/AppContext";
 export default function Notification(props) {
   const { notificationList, setNotificationList } = useContext(appContext);

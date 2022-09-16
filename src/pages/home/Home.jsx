@@ -4,8 +4,13 @@ import { appContext } from "../../context/AppContext";
 import BundleImage from "../../images/home-bundle.png";
 import Navbar from "../../components/navbar/Navbar";
 const Home = () => {
-  const { productData, showItems, randomSortedProductData , getArrows , showMore } =
-    useContext(appContext);
+  const {
+    productData,
+    showItems,
+    randomSortedProductData,
+    getArrows,
+    showMore,
+  } = useContext(appContext);
   const autoMove = useRef(true);
   const firstSectionRef = useRef(null);
   const laptopsRef = useRef(null);

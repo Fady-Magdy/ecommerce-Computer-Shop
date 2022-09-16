@@ -13,10 +13,10 @@ export default function AppContextProvider(props) {
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [cartCount, setCartCount] = useState(0);
   const [notificationCount, setNotificationCount] = useState(0);
-  const [favouriteList, setFavouriteList] = useState([]);
+  const [favoriteList, setfavoriteList] = useState([]);
   const [userData, setUserData] = useState(UserData);
   const [checkOut, setCheckOut] = useState(false);
-  const [notificationList , setNotificationList] = useState([])
+  const [notificationList, setNotificationList] = useState([]);
   const [notificationMsgCount, setNotificationMsgCount] = useState(0);
   const [randomSortedProductData, setRandomSortedProductData] = useState(
     Array.from(productData)
@@ -26,15 +26,15 @@ export default function AppContextProvider(props) {
     setRandomSortedProductData(
       randomSortedProductData.sort((a, b) => 0.5 - Math.random())
     );
-    setFavouriteList(productData.filter((product) => product.favourite));
+    setfavoriteList(productData.filter((product) => product.favorite));
   }, []);
 
   //  Functions
-  const sendNotification = (msg , item) => {
-    let newList = notificationList
-    newList.push({id: notificationMsgCount ,message: msg , item: item})
-    setNotificationList(newList)
-    setNotificationMsgCount(prev => prev + 1)
+  const sendNotification = (msg, item) => {
+    let newList = notificationList;
+    newList.push({ id: notificationMsgCount, message: msg, item: item });
+    setNotificationList(newList);
+    setNotificationMsgCount((prev) => prev + 1);
   };
   const cancleOrder = (index) => {
     let newOrdersList = ordersData;
@@ -110,8 +110,8 @@ export default function AppContextProvider(props) {
       let newData = productData;
       newData[prod.id - 1].addedToCart = true;
       setProductData(newData);
-      sendNotification(`Item Added to Cart` , prod.title);
-    }else {
+      sendNotification(`Item Added to Cart`, prod.title);
+    } else {
       sendNotification(`Item Already in Cart`);
     }
   };
@@ -228,8 +228,8 @@ export default function AppContextProvider(props) {
     setCartCount,
     notificationCount,
     setNotificationCount,
-    favouriteList,
-    setFavouriteList,
+    favoriteList,
+    setfavoriteList,
     showItems,
     goRight,
     goLeft,
@@ -250,7 +250,7 @@ export default function AppContextProvider(props) {
     cancleOrder,
     sendNotification,
     notificationList,
-    notificationMsgCount
+    notificationMsgCount,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

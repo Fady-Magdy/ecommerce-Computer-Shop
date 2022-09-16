@@ -350,7 +350,12 @@ export default function Navbar() {
       <div className="notification-area">
         {notificationList.reverse().map((msg) => {
           return (
-            <Notification index={msg.id} key={msg.id} msg={msg.message} item={msg.item} />
+            <Notification
+              index={msg.id}
+              key={msg.id}
+              msg={msg.message}
+              item={msg.item}
+            />
           );
         })}
       </div>

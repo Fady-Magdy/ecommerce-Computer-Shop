@@ -35,10 +35,10 @@
     &.step1 :nth-child(1) {
       background-color: rgb(80, 150, 255);
     }
-    &.step2 :nth-child(-n+3) {
+    &.step2 :nth-child(-n + 3) {
       background-color: rgb(80, 150, 255);
     }
-    &.step3 :nth-child(-n+5) {
+    &.step3 :nth-child(-n + 5) {
       background-color: rgb(80, 150, 255);
     }
   }
@@ -157,6 +157,10 @@
   .last-step {
     padding: 40px;
     text-align: center;
+    .success {
+      font-weight: 800;
+      color: green;
+    }
   }
   .exit {
     position: absolute;

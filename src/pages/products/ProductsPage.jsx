@@ -5,7 +5,7 @@ import { appContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 
 const Product = () => {
-  const { searchValue , productData } = useContext(appContext);
+  const { searchValue, productData } = useContext(appContext);
   const newData = productData.filter(
     (product) =>
       product.title.toLowerCase().includes(searchValue) ||
