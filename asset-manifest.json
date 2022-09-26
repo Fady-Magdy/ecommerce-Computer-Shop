@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/ecommerce-Computer-Shop/static/css/main.b829bc39.css",
-    "main.js": "/ecommerce-Computer-Shop/static/js/main.f5cf1814.js",
+    "main.css": "/ecommerce-Computer-Shop/static/css/main.f52d3606.css",
+    "main.js": "/ecommerce-Computer-Shop/static/js/main.3158c0cf.js",
     "static/media/home-bundle.png": "/ecommerce-Computer-Shop/static/media/home-bundle.768dbc8ee48775dc6951.png",
     "index.html": "/ecommerce-Computer-Shop/index.html",
-    "main.b829bc39.css.map": "/ecommerce-Computer-Shop/static/css/main.b829bc39.css.map",
-    "main.f5cf1814.js.map": "/ecommerce-Computer-Shop/static/js/main.f5cf1814.js.map"
+    "main.f52d3606.css.map": "/ecommerce-Computer-Shop/static/css/main.f52d3606.css.map",
+    "main.3158c0cf.js.map": "/ecommerce-Computer-Shop/static/js/main.3158c0cf.js.map"
   },
   "entrypoints": [
-    "static/css/main.b829bc39.css",
-    "static/js/main.f5cf1814.js"
+    "static/css/main.f52d3606.css",
+    "static/js/main.3158c0cf.js"
   ]
 }
