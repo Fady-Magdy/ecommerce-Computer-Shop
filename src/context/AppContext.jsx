@@ -6,28 +6,45 @@ import UserData from "../userData";
 export const appContext = createContext();
 
 export default function AppContextProvider(props) {
-  const [cartData, setCartData] = useState([]);
   const [productData, setProductData] = useState(ProductData);
+  const [cartData, setCartData] = useState([]);
   const [ordersData, setOrdersData] = useState([]);
-  const [searchValue, setSearchValue] = useState("");
-  const [cartTotalPrice, setCartTotalPrice] = useState(0);
-  const [cartCount, setCartCount] = useState(0);
-  const [notificationCount, setNotificationCount] = useState(0);
   const [favoriteList, setfavoriteList] = useState([]);
   const [userData, setUserData] = useState(UserData);
-  const [checkOut, setCheckOut] = useState(false);
-  const [notificationList, setNotificationList] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+  const [cartTotalPrice, setCartTotalPrice] = useState(0);
+  const [cartCount, setCartCount] = useState(cartData.length);
+  const [notificationCount, setNotificationCount] = useState(0);
   const [notificationMsgCount, setNotificationMsgCount] = useState(0);
+  const [notificationList, setNotificationList] = useState([]);
+  const [checkOut, setCheckOut] = useState(false);
   const [randomSortedProductData, setRandomSortedProductData] = useState(
     Array.from(productData)
   );
   useEffect(() => {
+    setProductData(
+      JSON.parse(localStorage.getItem("productsData")) || ProductData
+    );
+    setOrdersData(JSON.parse(localStorage.getItem("ordersData")) || []);
+    setCartData(JSON.parse(localStorage.getItem("cartData")) || []);
     setRandomSortedProductData(
       randomSortedProductData.sort((a, b) => 0.5 - Math.random())
     );
-    setfavoriteList(productData.filter((product) => product.favorite));
   }, []);
-
+  useEffect(() => {
+    localStorage.setItem("productsData", JSON.stringify(productData));
+    setfavoriteList(productData.filter((product) => product.favorite));
+  }, [productData]);
+  useEffect(() => {
+    localStorage.setItem("ordersData", JSON.stringify(ordersData));
+  }, [ordersData]);
+  useEffect(() => {
+    localStorage.setItem("cartData", JSON.stringify(cartData));
+    setCartCount(cartData.length);
+    let totalPriceOfCart = 0;
+    cartData.forEach((item) => (totalPriceOfCart += item.price));
+    setCartTotalPrice(totalPriceOfCart);
+  }, [cartData]);
   //  Functions
   const sendNotification = (msg, item) => {
     let newList = notificationList;
@@ -113,6 +130,8 @@ export default function AppContextProvider(props) {
     } else {
       sendNotification(`Item Already in Cart`);
     }
+    localStorage.setItem("productsData", JSON.stringify(productData));
+    localStorage.setItem("cartData", JSON.stringify(cartData));
   };
   function increaseQuantity(e) {
     let avQuantity = +e.target.getAttribute("data-avquantity");
@@ -155,7 +174,8 @@ export default function AppContextProvider(props) {
     newCartData.splice(e.target.value - 1, 1);
     setCartData(newCartData);
     setCartCount((prev) => prev - 1);
-
+    localStorage.setItem("productsData", JSON.stringify(productData));
+    localStorage.setItem("cartData", JSON.stringify(cartData));
     let newTotalPrice = 0;
     for (let i = 0; i < newCartData.length; i++) {
       newTotalPrice += newCartData[i].price;

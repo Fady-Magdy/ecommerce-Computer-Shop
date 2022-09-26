@@ -16,7 +16,7 @@ export default [
     rating: 4,
     raters: 15,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "2",
@@ -34,7 +34,7 @@ export default [
     rating: 3,
     raters: 6,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "3",
@@ -53,7 +53,7 @@ export default [
     rating: 5,
     raters: 2,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "4",
@@ -72,7 +72,7 @@ export default [
     rating: 4,
     raters: 35,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "5",
@@ -91,7 +91,7 @@ export default [
     rating: 3,
     raters: 26,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "6",
@@ -109,7 +109,7 @@ export default [
     rating: 5,
     raters: 49,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "7",
@@ -128,7 +128,7 @@ export default [
     rating: 4,
     raters: 54,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "8",
@@ -147,7 +147,7 @@ export default [
     rating: 4,
     raters: 35,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "9",
@@ -166,7 +166,7 @@ export default [
     rating: 5,
     raters: 62,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "10",
@@ -185,7 +185,7 @@ export default [
     rating: 4,
     raters: 23,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "11",
@@ -204,7 +204,7 @@ export default [
     rating: 2,
     raters: 12,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "12",
@@ -223,7 +223,7 @@ export default [
     rating: 5,
     raters: 32,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "13",
@@ -242,7 +242,7 @@ export default [
     rating: 4,
     raters: 55,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "14",
@@ -261,7 +261,7 @@ export default [
     rating: 4,
     raters: 36,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "15",
@@ -279,7 +279,7 @@ export default [
     rating: 3,
     raters: 24,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "16",
@@ -297,7 +297,7 @@ export default [
     rating: 2,
     raters: 21,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "17",
@@ -317,7 +317,7 @@ export default [
     rating: 5,
     raters: 64,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "18",
@@ -337,7 +337,7 @@ export default [
     rating: 4,
     raters: 45,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "19",
@@ -356,7 +356,7 @@ export default [
     rating: 4,
     raters: 84,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "20",
@@ -374,7 +374,7 @@ export default [
     rating: 3,
     raters: 12,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "21",
@@ -393,7 +393,7 @@ export default [
     rating: 4,
     raters: 62,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "22",
@@ -412,7 +412,7 @@ export default [
     rating: 5,
     raters: 47,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "23",
@@ -431,7 +431,7 @@ export default [
     rating: 4,
     raters: 37,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "24",
@@ -451,7 +451,7 @@ export default [
     rating: 5,
     raters: 54,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "25",
@@ -469,7 +469,7 @@ export default [
     rating: 4,
     raters: 25,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "26",
@@ -487,7 +487,7 @@ export default [
     rating: 5,
     raters: 22,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "27",
@@ -506,7 +506,7 @@ export default [
     rating: 3,
     raters: 20,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "28",
@@ -524,7 +524,7 @@ export default [
     rating: 4,
     raters: 54,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "29",
@@ -543,7 +543,7 @@ export default [
     rating: 5,
     raters: 31,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "30",
@@ -562,7 +562,7 @@ export default [
     rating: 3,
     raters: 12,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "31",
@@ -580,7 +580,7 @@ export default [
     rating: 2,
     raters: 6,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "32",
@@ -599,7 +599,7 @@ export default [
     rating: 4,
     raters: 15,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "33",
@@ -618,7 +618,7 @@ export default [
     rating: 3,
     raters: 19,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "34",
@@ -637,7 +637,7 @@ export default [
     rating: 4,
     raters: 18,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "35",
@@ -656,7 +656,7 @@ export default [
     rating: 5,
     raters: 17,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "36",
@@ -675,7 +675,7 @@ export default [
     rating: 4,
     raters: 61,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "37",
@@ -694,7 +694,7 @@ export default [
     rating: 5,
     raters: 26,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "38",
@@ -713,7 +713,7 @@ export default [
     rating: 3,
     raters: 32,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "39",
@@ -732,7 +732,7 @@ export default [
     rating: 4,
     raters: 53,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
   {
     id: "40",
@@ -751,6 +751,6 @@ export default [
     rating: 4,
     raters: 36,
     addedToCart: false,
-    favourite: false,
+    favorite: false,
   },
 ];

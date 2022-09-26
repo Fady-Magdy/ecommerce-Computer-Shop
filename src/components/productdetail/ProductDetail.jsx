@@ -34,7 +34,7 @@ export default function ProductDetail() {
     setfavorite(productData[currentProduct.id - 1].favorite);
     setProductImage(currentProduct.images[0]);
     window.scrollTo(0, 0);
-  }, [currentProduct.id, currentProduct.images, productData, productId]);
+  }, [currentProduct.images]);
   const changeImage = (e) => {
     let image = e.target.getAttribute("data-image");
     setProductImage(image);
@@ -57,6 +57,7 @@ export default function ProductDetail() {
       `${currentProduct.favorite ? "Added to" : "Removed from"} Favorite`,
       currentProduct.title
     );
+    localStorage.setItem("productsData", JSON.stringify(productData));
   };
   return (
     <div className="product-page">

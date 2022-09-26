@@ -37,6 +37,7 @@ export default function CheckOut() {
       setProductData(newData);
       setOrdersData((prev) => [...prev, ...cartData]);
       setCartData([]);
+      localStorage.setItem("cartData", JSON.stringify([]));
       setCartCount(0);
       setCartTotalPrice(0);
       sendNotification("New Order Submitted", "You have added new order");

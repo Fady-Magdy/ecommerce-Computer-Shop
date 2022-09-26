@@ -223,6 +223,8 @@ export default function Navbar() {
                   setCartData([]);
                   setCartCount(0);
                   setCartTotalPrice(0);
+                  localStorage.setItem("productsData" , JSON.stringify(productData))
+                  localStorage.setItem("cartData", JSON.stringify(cartData));
                 }}
               >
                 Clear Cart

@@ -22,7 +22,6 @@ export default function Profile() {
     );
     setfavoriteList(newfavoriteList);
   };
-
   return (
     <>
       <Navbar />
