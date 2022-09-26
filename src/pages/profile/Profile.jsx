@@ -1,7 +1,6 @@
 import React from "react";
 import "./profile.scss";
 import { Link, useLocation } from "react-router-dom";
-import Navbar from "../../components/navbar/Navbar";
 import { useContext } from "react";
 import { appContext } from "../../context/AppContext";
 import { useEffect } from "react";
@@ -34,12 +33,10 @@ export default function Profile() {
   const location = useLocation();
   useEffect(() => {
     currentLocation.current = location.pathname;
-    console.log(currentLocation.current);
     window.scrollTo(0, 0);
   }, []);
   return (
     <>
-      <Navbar />
       <div className="profile-page">
         <div className="left-side">
           <div className="top">

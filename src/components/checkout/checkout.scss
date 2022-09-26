@@ -1,10 +1,12 @@
 .check-out {
-  position: relative;
+  position: absolute;
   top: -400px;
   transition: 0.5s;
+  z-index: 4;
   &.show {
-    top: 900%;
+    top: 50%;
     transition: 1s;
+    position: fixed;
   }
   .check-out-title {
     text-align: center;

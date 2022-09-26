@@ -25,6 +25,8 @@ export default function Navbar() {
     increaseQuantity,
     decreaseQuantity,
     notificationList,
+    favoriteList,
+    ordersData,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
@@ -123,7 +125,12 @@ export default function Navbar() {
           <img src={userData.userImage} alt="" />
         </div>
       </div>
-      <div className={`user-menu ${showUserMenu ? "show-user-menu" : ""}`}>
+      {/* ------------------------------------------------------- */}
+      {/*  User Menu */}
+      <div
+        onMouseLeave={() => setShowUserMenu(false)}
+        className={`user-menu ${showUserMenu ? "show-user-menu" : ""}`}
+      >
         <div className="user-image">
           <img src={userData.userImage} alt="" />
         </div>
@@ -131,12 +138,19 @@ export default function Navbar() {
         <Link className="view-profile-btn" to="/profile">
           View Profile
         </Link>
+        <div className="details">
+          <p>Favorites: {favoriteList.length} </p>
+          <p>Orders: {ordersData.length} </p>
+        </div>
       </div>
+      {/* Notifications */}
       <div
         className={`notification ${showNotification && "show-notification"}`}
       >
         No New Notifications
       </div>
+      {/* ------------------------------------------------------------- */}
+      {/* Cart */}
       <div className={`cart ${showCart && "showc-cart"}`}>
         <div className="products">
           {cartData.map((product) => {
@@ -229,7 +243,12 @@ export default function Navbar() {
           </>
         )}
       </div>
-      <div className={`menu ${showMenu ? "show-menu" : ""}`}>
+      {/* ---------------------------------------------------------------- */}
+      {/*  Menu */}
+      <div
+        onMouseLeave={() => setShowMenu(false)}
+        className={`menu ${showMenu ? "show-menu" : ""}`}
+      >
         <h3>Menu</h3>
         <ul>
           <div className="menu-list pages">
@@ -251,6 +270,7 @@ export default function Navbar() {
                 style={({ isActive }) => (isActive ? activeStyle : undefined)}
                 className="menu-item"
                 to="/product"
+                end
               >
                 <div className="icon">
                   <i className="fa-sharp fa-solid fa-shop"></i>
@@ -349,14 +369,10 @@ export default function Navbar() {
         </ul>
       </div>
       {checkOut && (
-        <div
-          onClick={() => {
-            setCheckOut(false);
-          }}
-          className="dark-bg"
-        ></div>
+        <div onClick={() => setCheckOut(false)} className="dark-bg"></div>
       )}
-      <CheckOut />
+      {/* -------------------------------------------------------- */}
+      {/*  Ntification Area */}
       <div className="notification-area">
         {notificationList.reverse().map((msg) => {
           return (

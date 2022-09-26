@@ -16,7 +16,6 @@ const Product = () => {
   newData.sort((a, b) => (a.rating < b.rating ? 1 : -1));
   return (
     <div className="products-page">
-      <Navbar />
       <div className="products-container">
         {newData.length === 0 && <h1>No Product found</h1>}
         {newData.length > 0 && (

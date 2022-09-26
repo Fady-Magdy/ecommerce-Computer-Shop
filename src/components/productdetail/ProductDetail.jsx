@@ -1,7 +1,6 @@
 import { useContext, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import "./productdetail.scss";
-import Navbar from "../navbar/Navbar";
 import { appContext } from "../../context/AppContext";
 import { useRef } from "react";
 export default function ProductDetail() {
@@ -60,7 +59,6 @@ export default function ProductDetail() {
   };
   return (
     <div className="product-page">
-      <Navbar />
       <div className="product-details">
         <div className="left">
           <div

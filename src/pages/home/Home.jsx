@@ -2,8 +2,7 @@ import { useRef, useEffect, useContext } from "react";
 import "./home.scss";
 import { appContext } from "../../context/AppContext";
 import BundleImage from "../../images/home-bundle.png";
-import Navbar from "../../components/navbar/Navbar";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 const Home = () => {
   const {
     productData,
@@ -27,7 +26,6 @@ const Home = () => {
   const location = useLocation();
   useEffect(() => {
     currentLocation.current = location.pathname;
-    console.log(currentLocation.current);
   }, []);
   function scrollProducts() {
     if (autoMove.current && currentLocation.current === "/")
@@ -40,11 +38,24 @@ const Home = () => {
   }, []);
   return (
     <div className="home-page">
-      <Navbar />
       <div className="home-container">
         <div className="home-first-bar">
           <div className="left">
             <h1>All You Need In One Place</h1>
+            <p>
+              We have only Products of the Highest quality with more than 50%
+              sale
+            </p>
+            <button className="view-products">
+              <Link to="/product">
+                <i className="fa-solid fa-shop"></i> <span>View Products</span>
+              </Link>
+            </button>
+            <button className="view-profile">
+              <Link to="/profile">
+                <i className="fa-solid fa-user"></i> <span>View Profile</span>
+              </Link>
+            </button>
           </div>
           <div className="bundle-image">
             <img src={BundleImage} alt="" />

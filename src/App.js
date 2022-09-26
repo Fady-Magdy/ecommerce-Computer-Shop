@@ -5,17 +5,23 @@ import ProductPage from "./pages/products/ProductsPage.jsx";
 import ProductDetail from "./components/productdetail/ProductDetail.jsx";
 import Profile from "./pages/profile/Profile.jsx";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Navbar from "./components/navbar/Navbar.jsx";
+import CheckOut from "./components/checkout/CheckOut.jsx";
+import Footer from "./components/footer/Footer.jsx";
 function App() {
   return (
     <div className="App">
       <AppContextProvider>
         <BrowserRouter basename="/ecommerce-Computer-Shop">
+          <Navbar />
           <Routes>
             <Route exact path="/" element={<Home />} />
             <Route path="/product" element={<ProductPage />} />
             <Route path="/product/:productId" element={<ProductDetail />} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
+          <Footer/>
+          <CheckOut />
         </BrowserRouter>
       </AppContextProvider>
     </div>

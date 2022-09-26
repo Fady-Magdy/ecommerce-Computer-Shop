@@ -59,6 +59,9 @@ export default function CheckOut() {
   useEffect(() => {
     setRandomYear(Math.floor(Math.random() * 10 + 2));
   }, [steps]);
+  useEffect(() => {
+    setSteps(1)
+  }, [checkOut])
   return (
     <div className={`check-out ${checkOut ? "show" : ""}`}>
       <h1 className="check-out-title">Checkout</h1>
