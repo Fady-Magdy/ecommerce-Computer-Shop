@@ -77,31 +77,39 @@ const Home = () => {
         </section>
         <section className="section">
           <div className="section-title">Top Laptops</div>
-          <div ref={laptopsRef} className="products-line">
-            {showItems(laptops)}
+          <div className="products-container">
+            <div ref={laptopsRef} className="products-line">
+              {showItems(laptops)}
+            </div>
+            {getArrows(laptopsRef)}
           </div>
-          {getArrows(laptopsRef)}
         </section>
         <section className="section">
           <div className="section-title">Keyboards for you</div>
-          <div ref={keyboardsRef} className="products-line">
-            {showItems(keyboards)}
+          <div className="products-container">
+            <div ref={keyboardsRef} className="products-line">
+              {showItems(keyboards)}
+            </div>
+            {getArrows(keyboardsRef)}
           </div>
-          {getArrows(keyboardsRef)}
         </section>
         <section className="section">
           <div className="section-title">New Mouses</div>
-          <div ref={mousesRef} className="products-line">
-            {showItems(mouses)}
+          <div className="products-container">
+            <div ref={mousesRef} className="products-line">
+              {showItems(mouses)}
+            </div>
+            {getArrows(mousesRef)}
           </div>
-          {getArrows(mousesRef)}
         </section>
         <section className="section">
           <div className="section-title">Special Headphones</div>
-          <div ref={headphonesRef} className="products-line">
-            {showItems(headphones)}
+          <div className="products-container">
+            <div ref={headphonesRef} className="products-line">
+              {showItems(headphones)}
+            </div>
+            {getArrows(headphonesRef)}
           </div>
-          {getArrows(headphonesRef)}
         </section>
       </div>
     </div>

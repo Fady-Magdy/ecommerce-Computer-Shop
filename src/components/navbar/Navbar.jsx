@@ -2,9 +2,8 @@ import React, { useRef, useState, useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import "./navbar.scss";
 import { appContext } from "../../context/AppContext";
-import CheckOut from "../checkout/CheckOut";
 import Notification from "../notification/Notification";
-export default function Navbar() {
+export default function Navbar(props) {
   const searchBar = useRef();
   const [emptySearchBar, setEmptySearchBar] = useState(true);
   const {
@@ -87,6 +86,14 @@ export default function Navbar() {
         </Link>
       </div>
       <div className="right">
+        <div
+          className={`icon`}
+          onClick={() => {
+            props.setDarkMode((prev) => !prev);
+          }}
+        >
+          <i className="fa-solid fa-circle-half-stroke"></i>
+        </div>
         <div
           className={`icon ${showNotification ? "on" : ""}`}
           onClick={() => {
