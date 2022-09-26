@@ -1,11 +1,10 @@
-import React, { useRef, useState, useContext, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useRef, useState, useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
 import "./navbar.scss";
 import { appContext } from "../../context/AppContext";
 import CheckOut from "../checkout/CheckOut";
 import Notification from "../notification/Notification";
 export default function Navbar() {
-  const [mobileView, setMobileView] = useState(false);
   const searchBar = useRef();
   const [emptySearchBar, setEmptySearchBar] = useState(true);
   const {
@@ -36,14 +35,11 @@ export default function Navbar() {
   };
   const count = useRef(0);
   count.current = 0;
-  useEffect(() => {
-    if (window.matchMedia("(max-width: 480px)").matches) {
-      setMobileView(true);
-    } else {
-    }
-  }, []);
-
   //  Functions
+  let activeStyle = {
+    color: "rgb(103, 169, 255)",
+    backgroundColor: "rgba(209, 231, 255, 0.080)",
+  };
   return (
     <div className="navbar">
       <div className="left">
@@ -59,8 +55,8 @@ export default function Navbar() {
         </div>
         <Link to="/">
           <h1>
-            <i className="fa-solid fa-computer"></i>
-            {!mobileView && "Computer Shop"}
+            <i className="brand fa-solid fa-computer"></i>
+            <span>Computer Shop</span>
           </h1>
         </Link>
       </div>
@@ -113,12 +109,9 @@ export default function Navbar() {
           <i className="fa-solid fa-cart-shopping"></i>
           <p>{cartCount}</p>
         </div>
-
-        {!mobileView && (
-          <div className="icon">
-            <i className="fa-solid fa-right-from-bracket"></i>
-          </div>
-        )}
+        <div className="logout icon">
+          <i className=" fa-solid fa-right-from-bracket"></i>
+        </div>
         <div
           className="user-image"
           onClick={() => {
@@ -223,7 +216,10 @@ export default function Navbar() {
                   setCartData([]);
                   setCartCount(0);
                   setCartTotalPrice(0);
-                  localStorage.setItem("productsData" , JSON.stringify(productData))
+                  localStorage.setItem(
+                    "productsData",
+                    JSON.stringify(productData)
+                  );
                   localStorage.setItem("cartData", JSON.stringify(cartData));
                 }}
               >
@@ -239,50 +235,62 @@ export default function Navbar() {
           <div className="menu-list pages">
             <h4>Pages</h4>
             <li>
-              <Link className="menu-item" to="/">
+              <NavLink
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                className="menu-item"
+                to="/"
+              >
                 <div className="icon">
                   <i className="fa-solid fa-house"></i>
                 </div>{" "}
                 <p>Home</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="menu-item" to="/product">
+              <NavLink
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                className="menu-item"
+                to="/product"
+              >
                 <div className="icon">
                   <i className="fa-sharp fa-solid fa-shop"></i>
                 </div>{" "}
                 <p>Products</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="menu-item" to="/profile">
+              <NavLink
+                style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                className="menu-item"
+                to="/profile"
+              >
                 <div className="icon">
                   <i className="fa-solid fa-user"></i>{" "}
                 </div>
                 <p>Profile</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="menu-item" to="/profile">
+              <NavLink className="menu-item" to="/profile">
                 <div className="icon">
                   <i className="fa-solid fa-bag-shopping"></i>
                 </div>{" "}
                 <p>Orders</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link className="menu-item" to="/profile">
+              <NavLink className="menu-item" to="/profile">
                 <div className="icon">
                   <i className="fa-solid fa-heart"></i>
                 </div>{" "}
                 <p>Favorites</p>
-              </Link>
+              </NavLink>
             </li>
           </div>
           <div className="menu-list categories">
             <h4>Categories</h4>
             <li>
-              <Link
+              <NavLink
                 onClick={() => {
                   search("laptop");
                 }}
@@ -293,10 +301,10 @@ export default function Navbar() {
                   <i className="fa-solid fa-laptop"></i>
                 </div>{" "}
                 <p>Laptops</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={() => {
                   search("keyboard");
                 }}
@@ -307,10 +315,10 @@ export default function Navbar() {
                   <i className="fa-solid fa-keyboard"></i>
                 </div>{" "}
                 <p>Keyboards</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={() => {
                   search("mouse");
                 }}
@@ -321,10 +329,10 @@ export default function Navbar() {
                   <i className="fa-solid fa-computer-mouse"></i>
                 </div>
                 <p>Mouses</p>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 onClick={() => {
                   search("headphone");
                 }}
@@ -335,7 +343,7 @@ export default function Navbar() {
                   <i className="fa-solid fa-headphones-simple"></i>
                 </div>{" "}
                 <p>Headphones</p>
-              </Link>
+              </NavLink>
             </li>
           </div>
         </ul>

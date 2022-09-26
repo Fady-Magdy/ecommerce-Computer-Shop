@@ -208,17 +208,35 @@ body {
     }
   }
 }
-@media (max-width: 480px) {
+@media (max-width: 1230px) {
+  .App {
+    .navbar {
+      .left {
+        a {
+          h1 {
+            span {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 768px) {
   .App {
     .navbar {
       padding: 10px;
       .left {
+        width: fit-content;
         a {
           margin-left: 5px;
           margin-right: 5px;
+
           h1 {
-            font-size: 25px;
-            margin-left: 0;
+            span {
+              display: none;
+            }
           }
         }
       }
@@ -238,6 +256,9 @@ body {
         .user-image {
           width: 30px;
         }
+        .logout {
+          display: none;
+        }
       }
       .icon {
         width: 30px;
@@ -256,66 +277,40 @@ body {
     }
     .section {
       padding: 0;
+      display: inline-block;
       .products-line {
         display: flex;
-        flex-direction: column;
-        height: 1400px;
         overflow: hidden;
         .product {
-          width: 80vw;
           margin: 10px 0;
           min-height: 400px;
         }
-      }
-      .arrow {
-        display: none;
       }
       .section-title {
         padding-left: 0;
         margin-top: 20px;
         text-align: center;
       }
-      .show-more {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        z-index: 1;
-        height: 100px;
-        background: linear-gradient(
-          to top,
-          #fff,
-          #fff,
-          rgba(255, 255, 255, 0.151)
-        );
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: 800;
-        font-size: 20px;
-        color: rgba(0, 0, 0, 0.733);
-        cursor: pointer;
-      }
     }
     .home-container {
       .home-first-bar {
         flex-direction: column;
         .left {
+          width: 100%;
+          height: 50%;
           h1 {
             font-size: 30px;
-            width: 100%;
+            width: 80%;
             height: 50%;
+            margin: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             margin-top: 60px;
           }
         }
         .bundle-image {
-          width: 100%;
           height: 50%;
-          overflow: visible;
-          padding-top: 50px;
-          box-sizing: content-box;
-          img {
-            height: 130%;
-          }
         }
       }
     }
@@ -512,7 +507,4 @@ body {
   border-radius: 10px;
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.219);
   animation: check-out-move 1s;
-}
-.show-more {
-  display: none;
 }

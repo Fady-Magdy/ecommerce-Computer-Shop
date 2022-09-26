@@ -1,9 +1,10 @@
 import React from "react";
 import "./profile.scss";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Navbar from "../../components/navbar/Navbar";
 import { useContext } from "react";
 import { appContext } from "../../context/AppContext";
+import { useEffect } from "react";
 export default function Profile() {
   const {
     favoriteList,
@@ -14,6 +15,9 @@ export default function Profile() {
     ordersData,
     cancelOrder,
     sendNotification,
+    productData,
+    setProductData,
+    currentLocation,
   } = useContext(appContext);
   const removeFromfavorite = (currentProductId) => {
     let newfavoriteList = favoriteList;
@@ -21,7 +25,18 @@ export default function Profile() {
       (product) => product.id !== currentProductId
     );
     setfavoriteList(newfavoriteList);
+    let newData = productData;
+    newData[currentProductId - 1].favorite =
+      !newData[currentProductId - 1].favorite;
+    setProductData(newData);
+    localStorage.setItem("productsData", JSON.stringify(productData));
   };
+  const location = useLocation();
+  useEffect(() => {
+    currentLocation.current = location.pathname;
+    console.log(currentLocation.current);
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <>
       <Navbar />

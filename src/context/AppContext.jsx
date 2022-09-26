@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { useState, useEffect } from "react";
 import { createContext } from "react";
 import { Link } from "react-router-dom";
@@ -21,6 +22,7 @@ export default function AppContextProvider(props) {
   const [randomSortedProductData, setRandomSortedProductData] = useState(
     Array.from(productData)
   );
+  const currentLocation = useRef("");
   useEffect(() => {
     setProductData(
       JSON.parse(localStorage.getItem("productsData")) || ProductData
@@ -88,21 +90,6 @@ export default function AppContextProvider(props) {
           }}
         >
           <i className="fa-solid fa-arrow-left"></i>
-        </div>
-      </>
-    );
-  };
-  const showMore = (ref) => {
-    return (
-      <>
-        <div
-          onClick={() => {
-            ref.current.style.height = "auto";
-            ref.current.parentNode.lastChild.style.display = "none";
-          }}
-          className="show-more"
-        >
-          Show More
         </div>
       </>
     );
@@ -257,13 +244,13 @@ export default function AppContextProvider(props) {
     decreaseQuantity,
     randomSortedProductData,
     getArrows,
-    showMore,
     ordersData,
     setOrdersData,
     cancelOrder,
     sendNotification,
     notificationList,
     notificationMsgCount,
+    currentLocation,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

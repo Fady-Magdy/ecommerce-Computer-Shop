@@ -3,13 +3,14 @@ import "./home.scss";
 import { appContext } from "../../context/AppContext";
 import BundleImage from "../../images/home-bundle.png";
 import Navbar from "../../components/navbar/Navbar";
+import { useLocation } from "react-router-dom";
 const Home = () => {
   const {
     productData,
     showItems,
     randomSortedProductData,
     getArrows,
-    showMore,
+    currentLocation,
   } = useContext(appContext);
   const autoMove = useRef(true);
   const firstSectionRef = useRef(null);
@@ -23,21 +24,20 @@ const Home = () => {
   const headphones = productData.filter(
     (prod) => prod.category === "headphone"
   );
+  const location = useLocation();
   useEffect(() => {
-    if (window.matchMedia("(max-width: 480px)").matches) {
-    } else {
-      setInterval(() => {
-        if (autoMove.current) {
-          firstSectionRef.current.scrollBy(308, 0);
-        }
-      }, 3000);
-    }
+    currentLocation.current = location.pathname;
+    console.log(currentLocation.current);
   }, []);
+  function scrollProducts() {
+    if (autoMove.current && currentLocation.current === "/")
+      firstSectionRef.current.scrollBy(308, 0);
+    setTimeout(() => scrollProducts(), 3000);
+  }
   useEffect(() => {
+    scrollProducts();
     window.scrollTo(0, 0);
   }, []);
-  //  functions
-
   return (
     <div className="home-page">
       <Navbar />
@@ -63,7 +63,6 @@ const Home = () => {
             {showItems(randomSortedProductData)}
           </div>
           {getArrows(firstSectionRef)}
-          {showMore(firstSectionRef)}
         </section>
         <section className="section">
           <div className="section-title">Top Laptops</div>
@@ -71,7 +70,6 @@ const Home = () => {
             {showItems(laptops)}
           </div>
           {getArrows(laptopsRef)}
-          {showMore(laptopsRef)}
         </section>
         <section className="section">
           <div className="section-title">Keyboards for you</div>
@@ -79,7 +77,6 @@ const Home = () => {
             {showItems(keyboards)}
           </div>
           {getArrows(keyboardsRef)}
-          {showMore(keyboardsRef)}
         </section>
         <section className="section">
           <div className="section-title">New Mouses</div>
@@ -87,7 +84,6 @@ const Home = () => {
             {showItems(mouses)}
           </div>
           {getArrows(mousesRef)}
-          {showMore(mousesRef)}
         </section>
         <section className="section">
           <div className="section-title">Special Headphones</div>
@@ -95,7 +91,6 @@ const Home = () => {
             {showItems(headphones)}
           </div>
           {getArrows(headphonesRef)}
-          {showMore(headphonesRef)}
         </section>
       </div>
     </div>

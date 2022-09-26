@@ -13,7 +13,6 @@ export default function ProductDetail() {
     addToCart,
     getStars,
     getArrows,
-    showMore,
     sendNotification,
     randomSortedProductData,
   } = useContext(appContext);
@@ -161,7 +160,6 @@ export default function ProductDetail() {
           {showItems(categoryList)}
         </div>
         {getArrows(similarItemsSection)}
-        {showMore(similarItemsSection)}
       </div>
       <div className="section">
         <div className="section-title">You May Also Like </div>
@@ -169,7 +167,6 @@ export default function ProductDetail() {
           {showItems(randomSortedProductData)}
         </div>
         {getArrows(YouMayAlsoLikeSection)}
-        {showMore(YouMayAlsoLikeSection)}
       </div>
     </div>
   );
