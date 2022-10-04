@@ -1,28 +1,30 @@
 import React, { useContext } from "react";
 import "./productspage.scss";
-import Navbar from "../../components/navbar/Navbar";
 import { appContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
+import ProductsFilter from "../../components/productsFilter/ProductsFilter";
+import { useEffect } from "react";
 
 const Product = () => {
-  const { searchValue, productData } = useContext(appContext);
-  const newData = productData.filter(
-    (product) =>
-      product.title.toLowerCase().includes(searchValue) ||
-      product.description.toLowerCase().includes(searchValue) ||
-      product.category.toLowerCase().includes(searchValue)
-  );
+  const { filteredData, setFilteredData } = useContext(appContext);
 
-  newData.sort((a, b) => (a.rating < b.rating ? 1 : -1));
+  useEffect(() => {
+    setFilteredData((prev) =>
+      prev.sort((a, b) => (a.rating < b.rating ? 1 : -1))
+    );
+  }, []);
   return (
     <div className="products-page">
+      <ProductsFilter />
       <div className="products-container">
-        {newData.length === 0 && <h1>No Product found</h1>}
-        {newData.length > 0 && (
-          <p className="found-text">Found {newData.length} Items</p>
+        {filteredData.length > 0 && (
+          <p className="found-text">Found {filteredData.length} Items</p>
         )}
         <div className="result-container">
-          {newData.map((product) => {
+          {filteredData.length === 0 && (
+            <h1 className="no-product">No Product found</h1>
+          )}
+          {filteredData.map((product) => {
             let stars = [];
             let ratingCount = 0;
             for (let i = 0; i < 5; i++) {

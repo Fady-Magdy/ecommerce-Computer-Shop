@@ -12,7 +12,7 @@ export default function AppContextProvider(props) {
   const [ordersData, setOrdersData] = useState([]);
   const [favoriteList, setfavoriteList] = useState([]);
   const [userData, setUserData] = useState(UserData);
-  const [searchValue, setSearchValue] = useState("");
+  const searchValue = useRef("");
   const [cartTotalPrice, setCartTotalPrice] = useState(0);
   const [cartCount, setCartCount] = useState(cartData.length);
   const [notificationCount, setNotificationCount] = useState(0);
@@ -22,7 +22,19 @@ export default function AppContextProvider(props) {
   const [randomSortedProductData, setRandomSortedProductData] = useState(
     Array.from(productData)
   );
+  const [filteredData, setFilteredData] = useState(productData);
   const currentLocation = useRef("");
+
+  const searchProduct = () => {
+    setFilteredData([
+      ...productData.filter(
+        (product) =>
+          product.title.toLowerCase().includes(searchValue.current) ||
+          product.description.toLowerCase().includes(searchValue.current) ||
+          product.category.toLowerCase().includes(searchValue.current)
+      ),
+    ]);
+  };
   useEffect(() => {
     setProductData(
       JSON.parse(localStorage.getItem("productsData")) || ProductData
@@ -217,7 +229,6 @@ export default function AppContextProvider(props) {
   };
   const value = {
     searchValue,
-    setSearchValue,
     cartData,
     setCartData,
     cartTotalPrice,
@@ -251,6 +262,9 @@ export default function AppContextProvider(props) {
     notificationList,
     notificationMsgCount,
     currentLocation,
+    filteredData,
+    setFilteredData,
+    searchProduct,
   };
   return (
     <appContext.Provider value={value}>{props.children}</appContext.Provider>

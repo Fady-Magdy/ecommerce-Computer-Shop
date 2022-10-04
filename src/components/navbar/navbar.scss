@@ -63,7 +63,6 @@
         }
         display: inline;
         color: #fff;
-        font-size: 2cqw;
         margin-left: 1vw;
         i {
           margin-right: 1vw;
@@ -84,11 +83,6 @@
       border: none;
       border-radius: 4px 0 0 4px;
     }
-    .disabled-link {
-      pointer-events: none;
-    }
-    a {
-      cursor: pointer;
       button {
         height: 40px;
         width: 60px;
@@ -105,7 +99,6 @@
           background-color: rgb(209, 234, 255);
         }
       }
-    }
   }
   .right {
     display: flex;

@@ -1,13 +1,11 @@
 import React, { useRef, useState, useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import "./navbar.scss";
 import { appContext } from "../../context/AppContext";
 import Notification from "../notification/Notification";
 export default function Navbar(props) {
   const searchBar = useRef();
-  const [emptySearchBar, setEmptySearchBar] = useState(true);
   const {
-    setSearchValue,
     cartData,
     setCartData,
     cartTotalPrice,
@@ -26,13 +24,21 @@ export default function Navbar(props) {
     notificationList,
     favoriteList,
     ordersData,
+    searchProduct,
+    searchValue,
   } = useContext(appContext);
   const [showCart, setShowCart] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
+  let navigate = useNavigate();
+  const routeChange = () => {
+    let path = `/product`;
+  };
   const search = (valueFrom) => {
-    setSearchValue(valueFrom);
+    searchValue.current = valueFrom;
+    searchProduct();
+    searchValue.current = "";
   };
   const count = useRef(0);
   count.current = 0;
@@ -41,6 +47,7 @@ export default function Navbar(props) {
     color: "rgb(103, 169, 255)",
     backgroundColor: "rgba(209, 231, 255, 0.080)",
   };
+
   return (
     <div className="navbar">
       <div className="left">
@@ -57,33 +64,32 @@ export default function Navbar(props) {
         <Link to="/">
           <h1>
             <i className="brand fa-solid fa-computer"></i>
-            <span>Computer Shop</span>
+            <span>PC Shop</span>
           </h1>
         </Link>
       </div>
       <div className="center">
         <input
           placeholder="Search Products"
-          onChange={(e) => {
-            e.target.value !== ""
-              ? setEmptySearchBar(false)
-              : setEmptySearchBar(true);
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              search(e.target.value.toLowerCase());
+              navigate("/product");
+            }
           }}
           ref={searchBar}
           type="text"
         />
-        <Link
-          to="/product"
-          className={`${emptySearchBar ? "disabled-link" : ""}`}
-        >
-          <button
-            onClick={() => {
+        <button
+          onClick={() => {
+            if (searchBar.current.value !== "") {
               search(searchBar.current.value.toLowerCase());
-            }}
-          >
-            <i className="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </Link>
+              navigate("/product");
+            }
+          }}
+        >
+          <i className="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
       <div className="right">
         <div

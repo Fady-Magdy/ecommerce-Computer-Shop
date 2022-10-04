@@ -622,7 +622,7 @@ export default [
   },
   {
     id: "34",
-    title: " INSMART PC Gaming",
+    title: "INSMART PC Gaming",
     brand: "INSMART",
     category: "headphone",
     price: 18,

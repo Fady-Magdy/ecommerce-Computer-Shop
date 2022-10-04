@@ -1,15 +1,20 @@
 .products-page {
+  display: flex;
   .products-container {
     padding-top: 50px;
+    width: 85%;
     .found-text {
       text-align: center;
     }
     .result-container {
-      padding: 40px;
+      padding: 20px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
       gap: 20px;
+      .no-product {
+        text-align: center;
+      }
       .product {
         width: 300px;
         height: 450px;
