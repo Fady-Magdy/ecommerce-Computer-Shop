@@ -1,5 +1,23 @@
 .products-page {
   display: flex;
+  min-height: 100vh;
+  .show-hide {
+    position: fixed;
+    top: 60px;
+    left: 0px;
+    z-index: 3;
+    padding: 20px 7px;
+    border-radius: 0 10px 10px 0;
+    background-color: rgb(35, 49, 61);
+    color: #fff;
+    border: none;
+    transition: 0.5s;
+    display: none;
+    cursor: pointer;
+    &.show {
+      left: 250px;
+    }
+  }
   .products-container {
     padding-top: 50px;
     width: 85%;

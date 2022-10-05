@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { appContext } from "../../context/AppContext";
 import { useState } from "react";
 const ProductsFilter = (props) => {
-  const { filteredData, setFilteredData, productData } = useContext(appContext);
+  const { setFilteredData, productData } = useContext(appContext);
   const [filterChanges, setFilterChanges] = useState({
     sort: "rating",
     minPrice: "",
@@ -24,7 +24,6 @@ const ProductsFilter = (props) => {
 
   function startFiltering() {
     let newData = productData;
-
     if (filterChanges.minPrice !== "") {
       newData = newData.filter(
         (product) => product.price >= +filterChanges.minPrice
@@ -74,7 +73,7 @@ const ProductsFilter = (props) => {
     }
   }
   return (
-    <div className="products-filter">
+    <div className={`products-filter ${props.showFilter ? "show" : ""}`}>
       <h1 className="filter-title">Filter</h1>
       <div className="filter-section">
         <h3>Sort by</h3>

@@ -57,16 +57,15 @@
       display: flex;
       align-items: center;
       text-decoration: none;
-      h1 {
-        i {
-          font-size: 30px;
-        }
-        display: inline;
-        color: #fff;
-        margin-left: 1vw;
-        i {
-          margin-right: 1vw;
-        }
+      color: #fff;
+      margin-left: 1vw;
+      i {
+        font-size: 30px;
+        margin-right: 10px;
+      }
+      span {
+        font-size: 30px;
+        font-weight: 800;
       }
     }
   }
@@ -83,22 +82,22 @@
       border: none;
       border-radius: 4px 0 0 4px;
     }
-      button {
-        height: 40px;
-        width: 60px;
-        outline: none;
-        border: none;
-        border-radius: 0 4px 4px 0;
-        background-color: rgb(255, 255, 255);
-        transition: 0.2s;
-        cursor: pointer;
-        i {
-          font-size: 20px;
-        }
-        &:hover {
-          background-color: rgb(209, 234, 255);
-        }
+    button {
+      height: 40px;
+      width: 60px;
+      outline: none;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      background-color: rgb(255, 255, 255);
+      transition: 0.2s;
+      cursor: pointer;
+      i {
+        font-size: 20px;
       }
+      &:hover {
+        background-color: rgb(209, 234, 255);
+      }
+    }
   }
   .right {
     display: flex;

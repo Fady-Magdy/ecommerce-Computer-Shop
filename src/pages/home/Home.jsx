@@ -2,6 +2,7 @@ import { useRef, useEffect, useContext } from "react";
 import "./home.scss";
 import { appContext } from "../../context/AppContext";
 import BundleImage from "../../images/home-bundle.png";
+import bundle2Img from "../../images/bundle2.png";
 import { Link, useLocation } from "react-router-dom";
 const Home = () => {
   const {
@@ -43,8 +44,8 @@ const Home = () => {
           <div className="left">
             <h1>All You Need In One Place</h1>
             <p>
-              We have only Products of the Highest quality with more than 50%
-              sale
+              Build your dream computer with our high quality computer parts and
+              accessories with more than 50% sale
             </p>
             <button className="view-products">
               <Link to="/product">
@@ -74,6 +75,19 @@ const Home = () => {
             {showItems(randomSortedProductData)}
           </div>
           {getArrows(firstSectionRef)}
+        </section>
+        <section className="home-first-bar home-section">
+          <div className="left">
+            <img src={bundle2Img} alt="bundle" />
+          </div>
+          <div className="right">
+            <h1>Get the best deal for any budget</h1>
+            <p>
+              We have different products for every budget, you can choose the
+              budget you want and you will get the best recommendations, use our
+              filter in products page to find the product you want
+            </p>
+          </div>
         </section>
         <section className="section">
           <div className="section-title">Top Laptops</div>

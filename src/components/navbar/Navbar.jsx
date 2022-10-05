@@ -32,9 +32,6 @@ export default function Navbar(props) {
   const [showMenu, setShowMenu] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
   let navigate = useNavigate();
-  const routeChange = () => {
-    let path = `/product`;
-  };
   const search = (valueFrom) => {
     searchValue.current = valueFrom;
     searchProduct();
@@ -62,10 +59,8 @@ export default function Navbar(props) {
           <i className="fa-solid fa-bars"></i>
         </div>
         <Link to="/">
-          <h1>
-            <i className="brand fa-solid fa-computer"></i>
-            <span>PC Shop</span>
-          </h1>
+          <i className="brand fa-solid fa-computer"></i>
+          <span>PC Shop</span>
         </Link>
       </div>
       <div className="center">

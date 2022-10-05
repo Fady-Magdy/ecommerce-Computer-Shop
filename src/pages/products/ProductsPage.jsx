@@ -4,10 +4,11 @@ import { appContext } from "../../context/AppContext";
 import { Link } from "react-router-dom";
 import ProductsFilter from "../../components/productsFilter/ProductsFilter";
 import { useEffect } from "react";
+import { useState } from "react";
 
 const Product = () => {
   const { filteredData, setFilteredData } = useContext(appContext);
-
+  const [showFilter, setShowFilter] = useState(false);
   useEffect(() => {
     setFilteredData((prev) =>
       prev.sort((a, b) => (a.rating < b.rating ? 1 : -1))
@@ -15,7 +16,15 @@ const Product = () => {
   }, []);
   return (
     <div className="products-page">
-      <ProductsFilter />
+      <ProductsFilter showFilter={showFilter} />
+      <button
+        className={`show-hide ${showFilter ? "show" : ""} `}
+        onClick={() => setShowFilter((prev) => !prev)}
+      >
+        <i
+          className={`fa-solid fa-chevron-${showFilter ? "left" : "right"}`}
+        ></i>
+      </button>
       <div className="products-container">
         {filteredData.length > 0 && (
           <p className="found-text">Found {filteredData.length} Items</p>

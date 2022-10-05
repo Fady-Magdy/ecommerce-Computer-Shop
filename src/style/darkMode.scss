@@ -9,6 +9,9 @@
         color: rgba(255, 255, 255, 0.774);
       }
     }
+    .notification {
+      background-color: $navbar-background;
+    }
     .menu {
       background-color: $navbar-background;
       color: rgba(255, 255, 255, 0.596);
@@ -127,6 +130,16 @@
     background-color: $navbar-background;
   }
   .products-page {
+    .products-filter {
+      background-color: $navbar-background;
+      color: rgba(255, 255, 255, 0.651);
+      .submit {
+        background-color: rgba(255, 255, 255, 0.267);
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.411);
+        }
+      }
+    }
     .products-container {
       .result-container {
         .product {

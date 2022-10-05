@@ -228,10 +228,8 @@ body {
     .navbar {
       .left {
         a {
-          h1 {
-            span {
-              display: none;
-            }
+          span {
+            display: none;
           }
         }
       }
@@ -240,6 +238,19 @@ body {
 }
 @media (max-width: 768px) {
   .App {
+    .products-filter {
+      position: fixed;
+      margin-top: -5px;
+      z-index: 2;
+    }
+    .products-page {
+      .show-hide {
+        display: block;
+      }
+      .products-container {
+        width: 100%;
+      }
+    }
     .navbar {
       padding: 10px;
       .left {
@@ -247,7 +258,6 @@ body {
         a {
           margin-left: 5px;
           margin-right: 5px;
-
           h1 {
             span {
               display: none;
@@ -259,12 +269,9 @@ body {
         input {
           height: 35px;
         }
-        a {
+        button {
           width: 50px;
-          button {
-            width: 100%;
-            height: 35px;
-          }
+          height: 35px;
         }
       }
       .right {
@@ -318,8 +325,8 @@ body {
           padding: 10px;
           margin-top: 80px;
           h1 {
-            font-size: 30px;
-            width: 80%;
+            font-size: 25px;
+            width: 100%;
             margin: auto;
             display: flex;
             justify-content: center;
@@ -327,7 +334,10 @@ body {
             margin-bottom: 10px;
           }
           p {
+            margin: auto;
+            width: 80%;
             font-size: 14px;
+            line-height: 25px;
             margin-bottom: 20px;
           }
           button {

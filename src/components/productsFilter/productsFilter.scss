@@ -1,5 +1,6 @@
 .products-filter {
   width: 250px;
+  min-width: 250px;
   height: 100vh;
   overflow: auto;
   color: #fff;
@@ -7,7 +8,12 @@
   padding: 20px;
   position: sticky;
   margin-top: 50px;
+  left: -250px;
   top: 50px;
+  transition: 0.5s;
+  &.show {
+    left: 0;
+  }
   .filter-title {
     text-align: center;
     margin: 0;
@@ -24,6 +30,7 @@
       padding-left: 10px;
       border: none;
       outline: none;
+      cursor: pointer;
     }
     .min-max-container {
       display: flex;
